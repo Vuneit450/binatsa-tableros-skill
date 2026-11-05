@@ -1,22 +1,28 @@
 ---
 name: tableros-campanas-binatsa
-description: "Punto de partida para cualquier dashboard de Cobranza BINATSA en Tableau Cloud. Usar siempre primero cuando el usuario pida armar, crear, modificar, revisar o publicar un dashboard o tablero de cobranza en Tableau, o trabajar con un cliente de BINATSA: hace las preguntas iniciales, reúne los recursos y fija las reglas generales y el flujo. Después pasar a los módulos de datos, estructura, KPIs, tooltips, cliente/limpieza, publicación y video guía."
+description: "Tableros de campañas de call center de BINATSA en Tableau Cloud (Cobranza, ATC, Ventas, Retenciones) con el estilo BINATSA. Usar al crear, rehacer, modificar, revisar o publicar un tablero o dashboard de una campaña; al recibir un .twbx o un link de Tableau Cloud de un cliente de BINATSA; al descargar o publicar con token, servidor MCP o API de Tableau; o al hacer el video guía de un tablero."
 ---
 
-# Base · Dashboards de Cobranza BINATSA
+# Tableros de campañas BINATSA
+Responder en español, corto y directo.
 
-Responde siempre en español, corto y directo. Quien usa este skill es del equipo de BINATSA; no asumir quién es.
-Plantilla para cualquier cliente. Nada es específico de un proyecto; los datos de cada proyecto se preguntan al iniciar.
+Objetivo: que cada tablero se reconozca como de BINATSA a primera vista. El estilo es fijo; por proyecto solo cambian los datos, las métricas del giro y los colores del cliente. Del libro del cliente se toman los datos y las reglas, nunca su diseño.
 
-## Módulos relacionados
-- `referencias/diseno.md`: Dirección, Operación, layout, estilo.
-- `referencias/datos.md`: tablas, reglas de negocio, validación y seguridad; va ANTES de construir.
-- `referencias/giros/cobranza.md`: tarjetas KPI y glosario.
-- `referencias/tooltips.md`: descripciones emergentes.
-- `referencias/cliente-limpieza.md`: vista del cliente y limpieza de huérfanos.
-- `referencias/publicacion.md`: checklist, publicación y monitoreo.
-- `referencias/video-guia.md`: video guía para un usuario nuevo; último paso, después de publicar.
+- Una campaña = un libro = un tablero (si hay más, el usuario lo indica).
+- "Propuesto" en cualquier referencia = aplicarlo por defecto, avisarlo y marcarlo "por confirmar".
 
+## Qué abrir en cada paso
+| Paso | Abrir |
+|---|---|
+| Datos, reglas y caso de control | `referencias/datos.md` + `referencias/giros/<giro>.md` |
+| Construcción | `referencias/diseno.md`, `referencias/tooltips.md` y el giro |
+| Pruebas y publicación | `referencias/publicacion.md`, `referencias/cliente-limpieza.md` |
+| Video guía | `referencias/video-guia.md` |
+| Descargar o publicar con token | `herramientas/README.md` |
+
+Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas sin archivo. Si el giro no está completo, avisar y armarlo con el usuario a partir de las reglas generales.
+
+<!-- Secciones siguientes: por reescribir (flujo, preguntas, seguridad) -->
 ## Recursos de BINATSA
 - Repositorio de GitHub (público): Vuneit450/binatsa-tableros-skill. Solo lleva lo que sirve para cualquier campaña.
   - marca-binatsa/binatsa.svg: logo vectorial (turquesa #00B3B8, azul marino #0B1F3A). Usarlo siempre; si Tableau no acepta SVG en el objeto Imagen, generar un PNG desde el SVG.
