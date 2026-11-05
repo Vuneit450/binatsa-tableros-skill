@@ -1,25 +1,23 @@
-# Estructura y estilo · Dashboards de Cobranza BINATSA
+# Diseño · Tableros de campañas BINATSA
 
-## Estructura estándar
-Como mínimo dos vistas, Dirección y Operación; el proyecto puede agregar más (por ejemplo un seguimiento por asesor). Todas llevan el título principal, el ícono del cliente, el logo de BINATSA, los controles de arriba y los botones de navegación hacia las demás vistas, con el mismo formato.
+Estilo tomado de los tableros reales de referencia de BINATSA (uno de ATC y uno de Cobranza).
 
-### Logos
-Dos logos, en la misma fila del título principal y siempre en la misma posición en todas las vistas:
-- Ícono del cliente, arriba a la izquierda: imagen cuadrada de unos 88 x 80 px.
-- Logo de BINATSA (`marca-binatsa/binatsa.svg`; en PNG si Tableau no acepta SVG), arriba a la derecha y pegado a la esquina: unos 272 x 80 px, con alto proporcional sin deformar, sobre una tarjeta blanca porque sus letras azul marino no se leen sobre la franja oscura. Referencia visual: `ejemplos/encabezado.png` (ilustración con datos inventados).
+## Encabezado (igual en todas las vistas)
+Fila de unos 72 px de alto, a todo el ancho. De izquierda a derecha:
+1. **Logo del cliente** (unos 100 x 72 px) sobre fondo blanco: el PNG con proporción fija, nunca estirado.
+2. **Franja de título** (cerca de la mitad del ancho), en el color oscuro de la marca del cliente. Es la única parte del encabezado con fondo oscuro.
+   - Título: "<emoji> <Campaña> · <Vista>", 20 pt, Tableau Bold, blanco.
+   - Subtítulo de 10 pt: "<Cliente> · <pregunta que responde la vista>".
+3. **Controles** (Periodo, Desde, Hasta y el control del giro) sobre un panel claro (`#e3e9f2`). Cada control va en blanco con una barra delgada del color oscuro de la marca a su izquierda.
+4. **Logo de BINATSA** (unos 100 x 72 px) sobre fondo blanco, pegado a la derecha.
 
-### Título principal del dashboard
-Texto de 20 pt en negrita, color blanco, sobre una franja del color oscuro de la marca del cliente (ver Contraste), sin borde, de unos 660 x 80 px, arriba a la izquierda junto al ícono del cliente. Formato del texto: "Cobranza <Cliente> · <Vista>" (por ejemplo "Cobranza <Cliente> · Dirección") y, debajo, un subtítulo de 10 pt con la pregunta que responde la vista (por ejemplo "¿Cómo va la campaña?"). Es el texto más grande del dashboard: los títulos de bloque (13 pt) quedan por debajo.
-El encabezado (título principal, ícono, controles y logo) tiene una sola franja de fondo completo, a todo el ancho, con esquina recta. Los filtros y parámetros del encabezado NO llevan fondo ni borde propios: el fondo que se ve detrás de ellos es el de la franja. En Tableau, una forma de lograrlo es poner todo el encabezado en un contenedor horizontal con el fondo de la franja y dejar sin fondo ni borde cada objeto de adentro (validar en el primer dashboard de cada cliente).
-
-### Botones de navegación
-Objeto Botón de navegación de tipo texto, uno por cada vista de destino, en una fila debajo del encabezado:
-- Tamaño fijo de 164 x 36 px, uno junto a otro y sin espacio entre ellos; la fila va pegada a la izquierda, bajo el título principal.
-- Fuente Tableau Bold de 11 pt, texto blanco.
-- Texto: "Ir a <Vista> →", con flecha. Ejemplos: "Ir a Operación →", "Ir a Seguimiento →".
-- Color por destino: Dirección en el color primario del cliente, Operación en su color secundario, las demás vistas en el color oscuro de la marca (negro o azul marino). Cada color debe llegar a 4.5:1 con el texto blanco; si el color de marca no llega (muchos rosas y turquesas se quedan en 3 a 3.7:1), usar su tono oscuro.
-- Botón "📖 Glosario" en gris `#55657A` (llega a 5.9:1 con texto blanco), presente en todas las vistas menos en la Guía de uso, y lleva a la Guía de uso.
-- En la Guía de uso, los botones hacia las demás vistas ocupan el ancho completo, repartido en partes iguales.
+## Botones de navegación
+Fila completa debajo del encabezado, sobre fondo claro (`#f3f5f9`), pegada a la izquierda. Un botón por vista de destino:
+- Botón de texto, unos 165 x 56 px, todos del mismo ancho y sin espacio entre ellos.
+- Texto: "<emoji> <Vista>" (por ejemplo "📊 Dirección", "⚙️ Operación", "👥 Asesores"), Tableau Bold 11 pt, blanco.
+- Color: las vistas principales en el color oscuro de la marca; "📖 Guía y glosario" y las vistas de apoyo en gris `#455a64`. Todo botón debe llegar a 4.5:1 con el texto blanco.
+- Libro con varias campañas: los botones que llevan a otra campaña van en el color de esa campaña, para diferenciarlas (por ejemplo "🔴 <Otra campaña>" en el color de esa campaña).
+- A la derecha de los botones, una línea "ℹ️" de 8 pt en gris `#44546a` con la instrucción corta de la vista (por ejemplo "Filtra campaña, fechas y KPI arriba").
 
 ## Vistas estándar
 Obligatorias: Dirección y Operación (arriba). Recomendada en todo proyecto: Guía de uso. Opcional, según el proyecto: Seguimiento. Cualquier otra vista adicional se define con el usuario. Todas llevan el mismo título principal, ícono del cliente, logo de BINATSA y botones de navegación (hacia todas las demás vistas).
