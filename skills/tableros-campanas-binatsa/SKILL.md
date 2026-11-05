@@ -22,6 +22,22 @@ Objetivo: que cada tablero se reconozca como de BINATSA a primera vista. El esti
 
 Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas sin archivo. Si el giro no está completo, avisar y armarlo con el usuario a partir de las reglas generales.
 
+## Flujo
+0. **Preparación (una vez):** cuenta dedicada en Tableau Cloud con un solo token (ver Seguridad). Libro plantilla BINATSA en `plantillas/` (mientras no exista, construir desde cero siguiendo `referencias/diseno.md`).
+1. **Arranque:** el usuario conecta la carpeta `BINATSA-Tableros/<cliente>/<campaña>/` con el logo del cliente en PNG y da el link del libro publicado. Crear `marca/`, `libro/`, `datos/`, `capturas/`, `video/` y copiar `brief.md` de `plantillas/`. Si ya existe `brief.md`, leerlo primero y no repetir lo que ya está respondido.
+2. **Libro:** descargarlo con `herramientas/descargar_libro.py`; si no se puede, pedirlo al usuario en `libro/`. Guardar el original intacto (`<nombre>_v0_original.twbx`) y trabajar siempre en copias (`v1`, `v2`…).
+3. **Revisión y preguntas:** leer la estructura del libro sin abrir datos (vistas, hojas, fuentes, fórmulas, parámetros); sacar la paleta del logo y revisar el contraste; entregar un resumen (qué datos hay, qué reglas se encontraron, qué falta); hacer las preguntas con respuesta propuesta. Antes de abrir datos reales, pedir permiso (ver Seguridad).
+4. **Reglas y caso de control:** acordar las reglas generales y las del giro, registrarlas en `brief.md` y fijar el caso de control (un día del reporte actual con sus cifras).
+5. **Construcción:** desde la plantilla, reemplazar la fuente de datos y ajustar colores, logo, nombres y métricas del giro. Orden: vistas, tarjetas, mapas de calor, hojas de Operación, tooltips, Guía y glosario. Proponer al usuario los gráficos adicionales.
+6. **Pruebas (solo en el proyecto de pruebas):** publicar y revisar contra el checklist, la prueba de interacción y el caso de control. Cada casilla que no cumple es un pendiente con su contador. En cada vuelta se corrigen juntos todos los pendientes abiertos y se publica una vez; un pendiente que llega a 5 intentos se aparta y se reporta; lo que se rompa al corregir entra como pendiente nuevo. Termina cuando no queda ningún pendiente abierto con menos de 5 intentos. Reportar qué se cumplió, qué quedó apartado y qué debe decidir el usuario.
+7. **Revisión del usuario:** visto bueno o cambios (cambios = vuelve al paso 5).
+8. **Publicación final:** solo con confirmación del usuario en ese momento. Publicar sobre el libro de producción (mismo nombre y proyecto); verificar que la contraseña de la fuente siga incrustada, que la programación de actualización corra ("Ejecutar ahora") y que haya alertas de fallo. Preparar la vista del cliente (`referencias/cliente-limpieza.md`).
+9. **Video guía:** hacerlo, entregarlo y agregar al tablero el enlace "▶ Manual en video" (`referencias/video-guia.md`).
+10. **Cierre:** recordar al usuario quitar a la cuenta dedicada el acceso al proyecto; registrar en `brief.md` la versión publicada y la fecha.
+
+**Cambios después de la entrega:** leer `brief.md`, hacer el cambio en una copia nueva y seguir desde el paso 6 ("Mantenimiento" en `referencias/publicacion.md`).
+**Sesión sin usuario presente:** avanzar hasta el paso 6 marcando lo supuesto "por confirmar"; nunca publicar en producción ni compartir con el cliente.
+
 <!-- Secciones siguientes: por reescribir (flujo, preguntas, seguridad) -->
 ## Recursos de BINATSA
 - Repositorio de GitHub (público): Vuneit450/binatsa-tableros-skill. Solo lleva lo que sirve para cualquier campaña.
@@ -85,14 +101,3 @@ Cuando la sesión está conectada a una carpeta de la computadora del usuario (p
 - Quién publica: la sesión, por la línea de comandos o la API de Tableau, con un token de acceso personal que el usuario configuró antes como variable de entorno (con permiso de publicar en el proyecto). El token o la contraseña nunca se escriben en archivos ni en el chat. Si no hay token, publica el usuario desde Tableau. Para incrustar credenciales en el extracto, publicar desde Tableau Desktop (ver publicación).
 - Objetivo y tope: el ciclo termina cuando todas las casillas del checklist de publicación están cumplidas y la prueba de interacción pasa. Se limita a 5 vueltas (propuesto); si no se cumple, se reporta qué falta y se detiene, sin seguir publicando.
 - Antes de la primera publicación sobre un libro de producción, confirmar con el usuario. Cada publicación deja registrada la versión que se subió, para poder volver a la anterior.
-
-## Flujo de trabajo
-1. Hacer la tanda 1 de preguntas. Si el usuario sube un .twbx, trabajar sobre ESE archivo (en copia versionada).
-2. Revisar los datos y acordar las reglas de negocio (`referencias/datos.md`), con el primer acercamiento a los datos que describe ese módulo.
-3. Construir, en este orden: estructura (vistas, encabezado, medidas y parámetros), KPIs (tarjetas y glosario), tooltips y Guía de uso. Hacer la tanda 2 de preguntas mientras se construye.
-4. Cambios de XML (tooltips, campos ocultos): trabajar en copia versionada del .twbx (.twb + Data/Extracts/*.hyper + Image/), con nombre versionado; publica el usuario o la sesión según la sección anterior.
-5. Cambios simples: edición web sin marcas seleccionadas y publicar sobre el mismo workbook.
-6. Tanda 3 de preguntas, y limpieza de la vista del cliente (`referencias/cliente-limpieza.md`).
-7. Para revisar dashboards publicados: usar el navegador (Claude in Chrome o el integrado con sesión del usuario); si pide contraseña, que el usuario inicie sesión.
-8. Correr el checklist de publicación, incluida la prueba de interacción (la mayoría de los gráficos se comunican entre sí); verificar y reportar en 1-2 frases más la tabla de interacción.
-9. Al terminar y publicar, hacer el video guía (`referencias/video-guia.md`): es el último paso de la entrega.
