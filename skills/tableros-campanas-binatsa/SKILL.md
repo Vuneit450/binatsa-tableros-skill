@@ -61,7 +61,8 @@ Con la herramienta de opción múltiple si existe (en Claude Code, AskUserQuesti
 
 ## Qué va dónde
 - **Repositorio público** (Vuneit450/binatsa-tableros-skill): solo lo que sirve para cualquier campaña: la skill, plantillas vacías, `herramientas/`, `marca-binatsa/` (logo, paleta y cierre del video) y ejemplos con datos inventados.
-- **Carpeta privada del proyecto** (`BINATSA-Tableros/<cliente>/<campaña>/`): todo lo del cliente: logo y paleta (`marca/`), `brief.md`, libros, datos, capturas y video. Nunca se sube al repositorio.
+- **Carpeta privada del proyecto** (`BINATSA-Tableros/<cliente>/<campaña>/`): todo lo del cliente: logo y paleta (`marca/`), `brief.md`, libros, datos, capturas y el motor del video. Nunca se sube al repositorio de la skill.
+- **Repositorio de videos de BINATSA:** solo el MP4 final de cada video guía (máximo 100 MB), por decisión de BINATSA (`referencias/video-guia.md`).
 - Antes de cualquier commit al repositorio, revisar el cambio: no puede llevar nombres de clientes, campañas, personas, tablas, servidores ni direcciones IP, ni siquiera como ejemplo.
 
 ## Seguridad
