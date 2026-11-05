@@ -43,3 +43,6 @@ diccionario-datos.md
 __pycache__/
 .DS_Store
 Thumbs.db
+
+# Plantillas BINATSA con datos inventados (sí se suben)
+!skills/tableros-campanas-binatsa/plantillas/*.twbx

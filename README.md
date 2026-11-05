@@ -15,7 +15,7 @@ skills/
     SKILL.md                   entrada: arranque, preguntas, flujo y seguridad
     referencias/               datos, diseño, tooltips, cliente y limpieza, publicación, video guía
       giros/                   métricas y reglas por tipo de campaña (cobranza; ATC, ventas y retenciones por llenar)
-    plantillas/                brief, diccionario de datos y paleta del cliente (se copian a la carpeta privada)
+    plantillas/                plantilla de Cobranza (.twbx con datos inventados), brief, diccionario y paleta del cliente
     herramientas/              publicar_libro.py, crear_libro_prueba.py y cómo aplicar reglas en Tableau
 ejemplos/                      ilustraciones y libro de prueba, todo con datos inventados
 ```

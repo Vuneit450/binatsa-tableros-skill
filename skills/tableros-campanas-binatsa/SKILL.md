@@ -23,7 +23,7 @@ Objetivo: que cada tablero se reconozca como de BINATSA a primera vista. El esti
 Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas sin archivo. Si el giro no está completo, avisar y armarlo con el usuario a partir de las reglas generales.
 
 ## Flujo
-0. **Preparación (una vez):** cuenta dedicada en Tableau Cloud con un solo token (ver Seguridad). Libro plantilla BINATSA en `plantillas/` (mientras no exista, construir desde cero siguiendo `referencias/diseno.md`).
+0. **Preparación (una vez):** cuenta dedicada en Tableau Cloud con un solo token (ver Seguridad). Libros plantilla BINATSA en `plantillas/`: Cobranza en `plantilla_cobranza_binatsa.twbx` (marcadores y pendientes en `LEEME_plantilla_cobranza.md`); para los giros sin plantilla, construir desde cero siguiendo `referencias/diseno.md`.
 1. **Arranque:** el usuario conecta la carpeta `BINATSA-Tableros/<cliente>/<campaña>/` con el logo del cliente en PNG y da el link del libro publicado. Crear `marca/`, `libro/`, `datos/`, `capturas/`, `video/` y copiar `brief.md` de `plantillas/`. Si ya existe `brief.md`, leerlo primero y no repetir lo que ya está respondido.
 2. **Libro:** descargarlo con `herramientas/descargar_libro.py`; si no se puede, pedirlo al usuario en `libro/`. Guardar el original intacto (`<nombre>_v0_original.twbx`) y trabajar siempre en copias (`v1`, `v2`…).
 3. **Revisión y preguntas:** leer la estructura del libro sin abrir datos (vistas, hojas, fuentes, fórmulas, parámetros); sacar la paleta del logo y revisar el contraste; entregar un resumen (qué datos hay, qué reglas se encontraron, qué falta); hacer las preguntas con respuesta propuesta. Antes de abrir datos reales, pedir permiso (ver Seguridad).
