@@ -9,6 +9,7 @@
 Uso:
     python interactividad.py libro_v1.twbx libro_v2.twbx --plan '{"Dirección": "Canal", "Operación": "Asesor"}'
     python interactividad.py ... --tarjetas '^(KPI |Tarjeta )'
+    python interactividad.py ... --solo-resaltar     (solo el punto 1)
 
 --plan: vista → nombre visible del campo de categoría (el mismo en todas sus hojas).
 --tarjetas: expresión regular con el nombre de las hojas de tarjetas KPI de ese libro.
@@ -63,6 +64,7 @@ def main():
     ap.add_argument("libro"); ap.add_argument("salida")
     ap.add_argument("--plan", required=True, help="JSON: vista → campo de categoría")
     ap.add_argument("--tarjetas", default=r"^(KPI |Tarjeta )", help="regex de las hojas de tarjetas KPI")
+    ap.add_argument("--solo-resaltar", action="store_true", help="no tocar Periodo ni agregar el control Descripciones")
     a = ap.parse_args()
     if pathlib.Path(a.libro).resolve() == pathlib.Path(a.salida).resolve():
         sys.exit("La salida debe ser otro archivo (versión nueva).")
@@ -73,7 +75,7 @@ def main():
     x = raw.replace('\r\n', '\n') if nl == '\r\n' else raw
     nl = '\n'
 
-    x, n_per = personalizado(x)
+    x, n_per = (x, 0) if a.solo_resaltar else personalizado(x)
     # Se quitan las acciones de resaltar al pasar el mouse que ya existan: varias por vista se anulan entre sí.
     x = re.sub(r"\s*<action [^>]*>\s*<activation auto-clear='true' type='on-hover' />.*?</action>", "", x, flags=re.S)
     cap, acc = mapa_captions(x), []
@@ -95,7 +97,8 @@ def main():
 
     sp = importlib.util.spec_from_file_location("descripciones", pathlib.Path(__file__).with_name("descripciones.py"))
     de = importlib.util.module_from_spec(sp); sp.loader.exec_module(de)
-    x = de.agregar(x, colocar="flotante")
+    if not a.solo_resaltar:
+        x = de.agregar(x, colocar="flotante")
 
     if '</actions>' in x:
         k = x.rindex('</actions>'); x = x[:k] + nl.join(acc) + nl + '  ' + x[k:]
@@ -104,7 +107,7 @@ def main():
     with zipfile.ZipFile(a.salida, 'w', zipfile.ZIP_DEFLATED) as zo:
         for it in z.infolist():
             zo.writestr(it, x.encode('utf-8') if it.filename == twb else z.read(it.filename))
-    print(f"{pathlib.Path(a.salida).name}: {len(acc)} acciones de resaltar | Periodo → Personalizado en {n_per} lugares | control Descripciones agregado")
+    print(f"{pathlib.Path(a.salida).name}: {len(acc)} acciones de resaltar | Periodo → Personalizado en {n_per} lugares | control Descripciones: {'no' if a.solo_resaltar else 'agregado'}")
 
 
 if __name__ == "__main__":
