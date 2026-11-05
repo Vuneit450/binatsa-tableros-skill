@@ -93,7 +93,7 @@ Con capturas reales no se transforma la imagen, porque se deformaría: se coloca
 ## Imágenes y datos
 - Capturas reales del tablero, hechas con código para que sean HD: un navegador automatizado abre el tablero (la persona inicia sesión; las credenciales nunca se escriben) y captura con un factor de escala de 2 o más, para poder acercar sin que se pixelen. Cada vista se captura completa, y las zonas que se acercan, a mayor resolución.
 - Réplica dibujada con código solo si no hay acceso al tablero, y avisarlo: se ve menos real. Debe usar los mismos colores y el mismo estilo del tablero real.
-- El tablero mide 1910 x 1300 px (proporción cercana a 1.5:1). En un video 16:9 no cabe entero a toda la altura: el plano general de apertura lo muestra completo y después la cámara lo recorre por zonas (ver "Composición del cuadro").
+- El tablero mide 2300 x 1300 px (proporción cercana a 1.77:1, casi la del video 16:9). El plano general de apertura lo muestra completo y después la cámara lo recorre por zonas (ver "Composición del cuadro").
 - Para cada segmentador que se demuestra, capturar el tablero en el estado de antes y en el de después de un solo cambio.
 - No inventar cifras: lo que no se lee en la captura no se rellena. Si un dato solo existe para un día, decirlo en pantalla.
 

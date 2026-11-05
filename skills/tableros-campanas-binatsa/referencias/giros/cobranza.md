@@ -7,11 +7,11 @@
 ## Anatomía de la tarjeta (propuesta, confirmar en la primera revisión de cada cliente)
 Referencia visual: `ejemplos/tarjeta-kpi.png`.
 De arriba hacia abajo. Todo va centrado excepto el título, que va a la izquierda:
-1. Título de la tarjeta (nombre de la métrica): 13 pt en Tableau Semibold, a la izquierda, sobre una franja de color de marca (en su tono oscuro si hace falta contraste, texto blanco) con esquinas redondeadas. Subtítulo opcional de 10 pt dentro de la misma franja (definición corta o periodo), en un tono claro de la misma familia de color.
+1. Título de la tarjeta: "<emoji> <métrica>", 10 pt, negrita, blanco, a la izquierda, sobre la franja del color oscuro de la marca (ver "Títulos de cada hoja" en `referencias/diseno.md`).
 2. Número grande, centrado: 28 pt en Tableau Bold, en un tono del primario que llegue a 3:1 contra el fondo (en BINATSA, turquesa oscuro `#007F84`; el turquesa del logo no llega) o en color de semáforo si la tarjeta tiene meta. Formato de módulo estructura: % con símbolo y 1 decimal, dinero con $ y miles.
 3. Dos deltas, centrados, en una línea o en dos: "▲ 4.2% vs periodo previo" y "▼ 1.1 pp vs 7 días previos", 10 pt, verde o rojo según sea mejor o peor. Con rango de 7 días o menos, solo el primero (ver Tarjetas KPI).
-4. Solo el título lleva fondo (la franja) y esquinas redondeadas (radio propuesto: 12 px, ver "Esquinas redondeadas" en `referencias/diseno.md`). El número y los deltas van SIN borde ni fondo, transparentes, por lo que el radio de la hoja solo se nota en el título. Requiere Tableau 2026.1 o posterior.
-5. Medidas: 271 x 190 px; el ancho se reparte en partes iguales (7 por fila en 1910 px); margen de 6 px y relleno de 6 px. Misma altura y ancho en toda la fila.
+4. Solo el título lleva fondo (la franja), con esquinas rectas. El número y los deltas van sin borde ni fondo.
+5. Medidas: ver "Medidas estándar" en `referencias/diseno.md` (6 por fila, hasta 2 filas). Misma altura y ancho en toda la fila.
 
 ## Glosario de KPIs (definiciones estándar; confirmar con el cliente si difieren)
 Este glosario es la fuente de las definiciones que se publican en la vista Guía de uso (`referencias/diseno.md`) y en los tooltips. Si cambia una definición, se cambia aquí primero.

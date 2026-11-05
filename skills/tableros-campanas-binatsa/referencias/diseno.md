@@ -44,29 +44,30 @@ Vista de solo texto, sin gráficos. En este orden:
 Tabla por asesor con sus indicadores, mapa de calor con selectores de KPI y de periodo, y barras. Clic en un asesor filtra todo; otro clic regresa a todos. Las metas no son estándar: solo si el cliente las tiene, se agregan y se marca con ✓ en verde del semáforo lo que las cumple.
 
 ## Layout
-- Todo en contenedores en MOSAICO (no flotante).
-- Tamaño: modo Fijo, 1910 x 1300 px, igual en todas las vistas (incluida la Guía de uso). Las vistas adicionales usan la misma medida salvo que se defina otra con el usuario.
-- La información no lleva borde ni color de fondo: todo transparente (gráficos, números de tarjetas KPI, filtros, parámetros, hojas y contenedores). Los ÚNICOS elementos que pueden llevar fondo o borde son los títulos (título principal, encabezados de zona, títulos de gráficos, de tablas y de tarjetas KPI: franja de color de marca) y los botones de navegación (fondo de color de marca).
-- Esquinas redondeadas: los títulos de gráficos, tablas y tarjetas KPI, que son lo único con fondo dentro de cada bloque, llevan esquinas redondeadas (radio propuesto: 12 px). El encabezado (título principal) y los botones llevan esquina recta. El resto es transparente y sin borde, así que su radio no se ve. En Tableau 2026.1 o posterior, el radio se aplica en el panel de diseño a cada hoja; la franja del título queda con las esquinas de arriba redondeadas (validar en el primer dashboard de cada cliente). Revisar las exportaciones a PDF o imagen, que pueden mostrar las esquinas distinto.
-- Todo va centrado (gráficos y tablas dentro de su zona, el contenido de las tablas, números y deltas de las tarjetas, filtros, parámetros, texto "Cómo leer") EXCEPTO los títulos, que van alineados a la izquierda (títulos de gráficos, de tablas y encabezados de zona), y los botones de navegación, que van pegados a la izquierda bajo el título principal.
+- Tamaño: modo Fijo, 2300 x 1300 px, igual en todas las vistas.
+- Todo en contenedores en mosaico (no flotante). Margen exterior de 8 px.
+- Fondo del tablero: blanco. La información no lleva borde ni fondo propio: gráficos, números de tarjetas, filtros y contenedores van transparentes.
+- Solo llevan fondo: la franja del título principal, los títulos de cada hoja (franja del color oscuro de la marca), los botones, el panel de controles y la fila de botones (ver Encabezado).
+- Esquinas rectas en todo.
+- Todo va centrado (gráficos, tablas, números y deltas de tarjetas, texto "Cómo leer"), excepto los títulos, que van a la izquierda, y los botones, pegados a la izquierda.
 
-## Medidas estándar
-Tomadas del tablero de referencia de 1910 x 1300 px, igual para todas las vistas. Referencia visual de las dos vistas obligatorias: `ejemplos/vista-direccion.png` y `ejemplos/vista-operacion.png`; de la franja de título de bloque: `ejemplos/franja-bloque.png`; de las tablas por asesor: `ejemplos/tabla-asesores.png`.
+## Títulos de cada hoja
+El título va dentro de la propia hoja (no en un objeto de texto aparte), sobre una franja del color oscuro de la marca:
+- Línea 1: "<emoji> <pregunta que responde>" (por ejemplo "✅ ¿Contestamos a tiempo?"), 12 pt, negrita, blanco.
+- Línea 2: cómo se lee o se calcula, en una línea (por ejemplo "Atendidas en ≤20 s ÷ atendidas."), 8 pt, en un tono claro (`#cfd8dc`).
+- En tarjetas KPI, solo la línea 1 con el nombre de la métrica, 10 pt.
 
+## Medidas estándar (en 2300 x 1300 px)
 | Elemento | Medida |
 |---|---|
-| Margen exterior del dashboard | 8 px |
-| Fila del encabezado | 80 px de alto |
-| Ícono del cliente | unos 88 x 80 px, arriba a la izquierda |
-| Título principal | unos 660 x 80 px |
-| Controles de arriba (Periodo, Desde, Hasta y Canal o Segmento) | entre 196 y 236 px de ancho y 80 px de alto |
-| Logo de BINATSA | unos 272 x 80 px, arriba a la derecha |
-| Botones de navegación | 164 x 36 px, debajo del encabezado, pegados a la izquierda, uno junto a otro |
-| Franja de título de bloque | ancho completo, 54 px de alto |
-| Tarjeta KPI | 271 x 190 px; el ancho se reparte en partes iguales (7 por fila en 1910 px); margen de 6 px y relleno de 6 px |
-| Selector de ancho completo (por ejemplo de KPI) | ancho completo, 40 px de alto |
-| Gráficos y tablas | margen de 6 px y relleno de 6 px; los principales entre 350 y 400 px de alto, los de apoyo entre 150 y 230 px |
-| Pie "Cómo leer" | ancho completo, 52 px de alto |
+| Encabezado | 72 px de alto (detalle en Encabezado) |
+| Fila de botones | 56 px de alto; botones de unos 165 px de ancho |
+| Tarjetas KPI | 6 por fila, de igual ancho (unos 380 px). Fila principal de unos 160 px de alto; segunda fila opcional de tarjetas de apoyo de unos 85 px. Máximo 2 filas |
+| Gráficos y tablas | margen de 4 px; los principales entre 350 y 500 px de alto, los de apoyo entre 150 y 250 px |
+| Selector de ancho completo (por ejemplo de KPI) | 40 px de alto |
+| Pie "Cómo leer" | ancho completo, una o dos líneas de 9 pt |
+
+Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabezado): sirven solo como idea general hasta que se actualicen.
 
 ## Interactividad
 - La mayoría de los gráficos se comunican entre sí: clic en una marca filtra los demás. Cuáles quedan fuera depende del proyecto (por ejemplo, un gráfico con otra fuente de datos o sin campos en común) y se declaran en el reporte con el motivo. Las tarjetas KPI son destino, no origen.
@@ -131,7 +132,7 @@ Ningún texto visible del dashboard (títulos, subtítulos, pies, tooltips y Gu�
 - Mapa geográfico: solo cuando el dato tiene zona (por ejemplo visitas).
 
 ## Dispositivos
-Los dashboards se diseñan solo para computadora (1910 x 1300 px). No se diseñan vistas para teléfono ni para tableta.
+Los dashboards se diseñan solo para computadora (2300 x 1300 px). No se diseñan vistas para teléfono ni para tableta.
 
 ## Paleta y tipografía
 Paleta de BINATSA (y modelo de cómo documentar la de un cliente): `marca-binatsa/paleta-binatsa.md`. Para cargarla en Tableau: ver la sección "Para Tableau" de ese mismo documento (el método depende de la versión).

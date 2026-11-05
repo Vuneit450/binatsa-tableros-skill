@@ -12,7 +12,7 @@
 - [ ] Información sin bordes ni fondos (todo transparente; solo los títulos y los botones de navegación pueden llevarlos); mosaico.
 - [ ] Todo centrado, menos los títulos (de gráficos, de tablas y encabezados de zona), a la izquierda.
 - [ ] Ningún gráfico con líneas de fondo ni con el título del segundo eje; los valores se leen por etiquetas, sin etiqueta en los valores 0 o nulos de los gráficos y con "-" en las celdas 0 o nulas de las tablas.
-- [ ] Tamaño: modo Fijo, 1910 x 1300 px en todas las vistas.
+- [ ] Tamaño: modo Fijo, 2300 x 1300 px en todas las vistas.
 - [ ] Prueba de interacción hecha (ver sección siguiente) y reportada.
 - [ ] Cifras cuadradas contra la fuente en al menos un caso de control.
 - [ ] Publicar sobre el workbook existente; credenciales incrustadas (las pone el usuario desde Desktop).
