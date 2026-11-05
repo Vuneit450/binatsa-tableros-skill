@@ -75,6 +75,8 @@ Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabez
 - **Clic en una marca filtra su vista.** Cada gráfico y tabla es origen de una acción de filtro al seleccionar, con destino todas las hojas de su misma vista (incluidas las tarjetas KPI) y "todos los campos" en común. Las tablas por asesor filtran solo por Asesor. Las acciones no pasan a otras vistas.
 - **Otro clic, o un clic fuera de las marcas, quita el filtro** y todo regresa al estado inicial.
 - **Las tarjetas KPI reciben, nunca son origen.**
+- **Pasar el mouse resalta los "datos hermanos".** Una acción de resaltar al pasar el mouse, a nivel de la vista, ilumina en todas las hojas lo que comparte el valor señalado y apaga lo demás. Campos: los de categoría del giro (por ejemplo Bucket o Segmento, Canal y Asesor en Cobranza; Campaña, Tipificación, Franja y Asesor en ATC; la lista va en `referencias/giros/<giro>.md`). Las tarjetas KPI quedan fuera del destino, para que no se apaguen. Para que dos hojas se iluminen juntas deben usar el campo con el mismo nombre.
+- **Clic en la categoría principal** (por ejemplo un bucket o segmento) además cambia ese parámetro de arriba con una acción de parámetro, para que todo lo que depende de él se ajuste.
 - **Clic en un día (acción de parámetro).** Los gráficos con la fecha en el eje no usan acción de filtro, porque dejaría a las tarjetas sin periodo previo y los deltas saldrían mal. Un clic en un día llena el parámetro "Día seleccionado"; al limpiar la selección, el parámetro vuelve a vacío. Todos los cálculos de periodo (ver `referencias/giros/<giro>.md`) usan [Desde efectivo] y [Hasta efectivo], que toman ese día si hay uno elegido. Así las tarjetas muestran el día elegido contra el día anterior y contra 7 días antes.
 - **Respaldo:** si en la plantilla la acción de parámetro no se limpia bien o los demás gráficos no responden al día, usar una acción de filtro normal en esos gráficos de fecha y quitar de su destino las tarjetas KPI. Avisar al usuario cuál quedó.
 - Quedan fuera solo las hojas que no comparten campos (por ejemplo, una encuesta de otra fuente). Se declaran en el reporte de la prueba de interacción con su motivo; deben ser la minoría.
@@ -118,11 +120,11 @@ Reglas de los deltas:
 - Todo porcentaje con símbolo % (1 decimal). Dinero con $ y miles; M/K en cifras grandes. Si el % se corta en celdas angostas (p. ej. mapa de calor dentro del tablero), avisar y proponer sin decimales o ensanchar; nunca dejar el número sin %.
 - Barras de un solo color: resaltar la más alta (acento) con su número arriba, resto neutro. Barras apiladas por una categoría ordenada del giro (por ejemplo segmentos de mora) usan el paso que le toca en la rampa (ver Paleta), igual en todas las hojas.
 - Etiquetas de valor en gráficos: si el valor de una marca es 0 o nulo, no se muestra su etiqueta, para no saturar la gráfica con datos innecesarios. Aplica a barras, mapa de calor y demás gráficos; la marca o la celda, si existe, se queda sin número. (Las tarjetas KPI sin datos siguen mostrando "-", ver "Estados vacíos y datos parciales".)
-- Tablas: una celda con valor 0 o nulo muestra "-" (un guion) en lugar del número, para que la celda no quede vacía ni muestre un 0 que se lea como dato.
+- Tablas: todo el contenido centrado (encabezados y celdas) y siempre con totales (total general en filas y, si aplica, en columnas). Una celda con valor 0 o nulo muestra "-" en lugar del número.
 - Sin ruido: nada de gráficos huérfanos, hojas visibles que el cliente no consulta (ocultas; acceso por "Ir a hoja"), ni calculados sin uso.
 - Nombres de hojas: sin estándar; cada proyecto usa los suyos. Los parámetros sí son estándar (ver Parámetros estándar).
-- Ningún gráfico lleva líneas de fondo: quitar la cuadrícula, las líneas de cero, las líneas de referencia sin uso y las divisiones de fila y columna. Como la cuadrícula ya no ayuda a leer los valores, mostrar la etiqueta del valor en las marcas donde haga falta (en las barras, el número arriba, como ya pide la regla de la barra destacada).
-- Ningún gráfico muestra el título del segundo eje (en gráficos de doble eje). Lo que mide el segundo eje se explica en el subtítulo de la zona y en el tooltip "Cómo se calcula".
+- Gráficos sin líneas y con fondo transparente: sin cuadrícula, líneas de cero, líneas de referencia sin uso, divisiones de fila y columna, ni líneas de eje. Los valores se leen con etiquetas en las marcas (en las barras, el número arriba).
+- Ningún gráfico muestra títulos de ejes, ni del primero ni del segundo, para que no le quiten espacio al gráfico. Lo que mide cada eje se explica en el subtítulo de la hoja y en el tooltip "Cómo se calcula".
 
 ## Formato regional
 - Idioma: toda etiqueta y todo texto en español.
