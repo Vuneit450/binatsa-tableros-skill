@@ -215,7 +215,7 @@ for fam, f in F.items():
         pon(f"K_{fam}_{suf}", fo, f"{f['t']} · {suf[0]} ({ {'g': 'mejora', 'r': 'empeora', 'n': 'sin cambio'}[suf[1]] })")
 
 # tablas, embudos y selectores
-pon("A_Asig", agg(F["Tasa"], CUR), "Atendidas", "integer", FMT["n"])
+pon("A_Asig", agg(F["Vue"], CUR), "Demoradas > 20 s", "integer", FMT["n"])
 pon("A_Prom", agg(F["PTP"], CUR), "Nivel de servicio", "real", FMT["p"])
 for nombre, cap, col in [("F_Asig", "① Recibidas", "recibidas_dia"), ("F_Marc", "② Atendidas", "atendidas_dia"),
                          ("F_Conn", "③ En nivel de servicio", "en_nivel_dia"), ("F_Ptp", "④ Tipificadas", "tipificadas_dia"),
@@ -310,7 +310,8 @@ for hoja in re.findall(r"<worksheet name='(KPI [A-Za-z]+)'>", x):
     if not f: continue
     i = x.index(f"<worksheet name='{hoja}'"); j = x.index("</worksheet>", i); w = x[i:j]
     w = re.sub(r"<title>.*?</title>", f"<title>\n          <formatted-text>\n            <run bold='true' fontcolor='#ffffff' fontsize='13'>{f['e']} {esc(f['t'])}</run>\n            <run>Æ&#10;</run>\n            <run fontcolor='#d6e6f2' fontsize='10'>{esc(f['sub'])}</run>\n          </formatted-text>\n        </title>", w, count=1, flags=re.S)
-    w = re.sub(r"(<format attr='text-format' )(?:field='[^']*' )?value='[^']*'", lambda m: f"{m.group(1)}value='{esc(TXT[f['f']])}'", w)
+    w = re.sub(r"\s*<format attr='text-format' (?:field='[^']*' )?value='[^']*' />", "", w)   # usa el formato del cálculo
+    w = re.sub(r"(<run bold='true' fontalignment='1' fontcolor=')#\w+(' fontsize='28')", r"\1#007f84\2", w)
     w = re.sub(r"<customized-tooltip>.*?</customized-tooltip>", lambda m: tooltip(fam, f), w, count=1, flags=re.S)
     x = x[:i] + w + x[j:]
 
@@ -323,7 +324,7 @@ TEXTOS = [
  ("asignados → gestionados → con contacto → promesas.", "recibidas → atendidas → en nivel de servicio → tipificadas."),
  ("🎯 ¿Qué canal tiene cartera sin tocar?", "🎯 ¿Cómo atiende cada canal?"),
  ("Por canal: cuánta cartera se trabaja, cuánto contesta, cuánto promete y cuánto recupera en el periodo", "Por canal: cuántas llamadas entran, qué tan rápido se atienden y cuánto se abandona en el periodo"),
- ("🧩 ¿Cuánto aporta cada canal?", "🧩 ¿Cuántas llamadas entran por canal?"),
+ ("🧩 ¿Cuánto aporta cada canal?", "🧩 ¿Cómo va cada canal en el KPI elegido?"),
  ("¿Qué canal recupera más cada día?", "¿Qué canal cumple cada día?"),
  ("🧩 ¿Qué canal recupera más?", "🧩 ¿Qué canal recibe más?"),
  ("Cada rebanada es lo que aporta un canal al pago del periodo.", "Cada rebanada es lo que aporta un canal a las llamadas del periodo."),
