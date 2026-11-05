@@ -115,6 +115,41 @@ def agregar(x, colocar="flotante"):
         x = x[:k] + "".join("\n      " + c for c in cols) + x[k:]
     return _controles(x, colocar)
 
+_EMOJI = False
+
+def _como_filtro(z, emoji=False):
+    """Convierte la copia de un filtro en el control Descripciones, con el mismo formato de título."""
+    z.set("param", "[Parameters].[Parametro Descripciones]"); z.set("mode", "compact")
+    ft = z.find("formatted-text")
+    if ft is not None:
+        runs = ft.findall("run")
+        for r in runs[1:]: ft.remove(r)
+        if runs:
+            viejo = (runs[0].text or "").strip()
+            letras = [ch for ch in viejo if ch.isalpha()]
+            mayus = letras and all(ch.isupper() for ch in letras)
+            con_emoji = emoji or (viejo and not viejo[0].isalnum())
+            txt = "Descripciones"
+            if mayus: txt = txt.upper()
+            if con_emoji: txt = "💬 " + txt
+            runs[0].text = txt
+    else:
+        z.attrib.pop("custom-title", None)
+
+def _encabezado_flotante(d, zs, ze, root, R, nid, num):
+    """Filtros flotantes: recorre a la izquierda los objetos flotantes del encabezado y pone la copia junto al último."""
+    import copy, xml.etree.ElementTree as ET
+    sig = sorted((z for z in root if z.tag == "zone" and z is not R and z.get("type-v2") == "paramctrl" and num(z, "y") < 12000), key=lambda z: num(z, "x"))
+    gap = min([num(R, "x") - num(z, "x") - num(z, "w") for z in sig if num(z, "x") < num(R, "x")] + [300])
+    gap = max(gap, 0); A = num(R, "w") + gap
+    flot = [z for z in root if z.tag == "zone" and num(z, "y") < num(R, "y") + num(R, "h") and num(z, "y") + num(z, "h") > num(R, "y") - 3000 and num(z, "w") < 40000]
+    izq = min(num(z, "x") for z in flot)
+    if izq - A < 20000: return None
+    for z in flot: z.set("x", str(num(z, "x") - A))
+    c = copy.deepcopy(R); c.set("id", str(nid)); c.set("x", str(num(R, "x") + A)); _como_filtro(c, _EMOJI)
+    hijos = list(root); root.insert(hijos.index(R) + 1, c)
+    return d[:zs] + ET.tostring(root, encoding="unicode") + d[ze + len("</zones>"):]
+
 def _en_encabezado(d, nid):
     """Mete el control en la fila de filtros del encabezado, al lado del último filtro. Devuelve d o None."""
     import copy, xml.etree.ElementTree as ET
@@ -130,29 +165,46 @@ def _en_encabezado(d, nid):
     params = [z for z in root.iter("zone") if z.get("type-v2") == "paramctrl" and num(z, "y") < 12000 and "Parametro Descripciones" not in z.get("param", "")]
     if not params: return None
     R = max(params, key=lambda z: num(z, "x") + num(z, "w"))
+    global _EMOJI
+    _EMOJI = any((r.text or " ").strip()[:1] and not (r.text or " ").strip()[:1].isalnum() for z in params for r in z.iter("run"))
+    if padre.get(R) is root:
+        return _encabezado_flotante(d, zs, ze, root, R, nid, num)
     textos = [z for z in root.iter("zone") if z.get("type-v2") == "text" and num(z, "y") < 12000 and num(z, "x") + num(z, "w") <= num(R, "x")]
     if not textos: return None
-    T = max(textos, key=lambda z: num(z, "w")); A = num(R, "w")
-    if num(T, "w") < A + 6000: return None
     def ancestros(z):
         out = []
         while z in padre: z = padre[z]; out.append(z)
         return out
+    T = max(textos, key=lambda z: num(z, "w"))
     aR, aT = ancestros(R), ancestros(T)
     Hc = next((a for a in aR if a in aT), None)
     if Hc is None: return None
-    C = R if padre.get(R) is Hc else next(a for a in aR if padre.get(a) is Hc)
-    t_fin = num(T, "x") + num(T, "w"); c_fin = num(C, "x") + num(C, "w")
+    # U = el contenedor propio del último filtro (sube mientras su padre solo tenga separadores vacíos).
+    U = R
+    while padre.get(U) is not Hc and all(h is U or h.get("type-v2") == "empty" or h.tag != "zone" for h in padre[U]):
+        U = padre[U]
+    P = padre[U]; hijos = list(P); k = hijos.index(U)
+    # Unidad a copiar: el separador vacío previo (si lo hay) + el contenedor del último filtro, con el mismo formato.
+    unidad = ([hijos[k - 1]] if k > 0 and hijos[k - 1].get("type-v2") == "empty" else []) + [U]
+    A = sum(num(u, "w") for u in unidad)
+    if num(T, "w") < A + 6000: return None
+    t_fin = num(T, "x") + num(T, "w"); u_fin = num(U, "x") + num(U, "w")
     for z in Hc.iter("zone"):
         if z is Hc: continue
-        if t_fin <= num(z, "x") < c_fin: z.set("x", str(num(z, "x") - A))
-    for z in [T] + [a for a in aT if a is not Hc and a in ancestros(T)][:aT.index(Hc)]:
+        if t_fin <= num(z, "x") < u_fin: z.set("x", str(num(z, "x") - A))
+    for z in [T] + aT[:aT.index(Hc)]:
         z.set("w", str(num(z, "w") - A))
-    nuevo = ET.Element("zone", {"h": R.get("h"), "id": str(nid), "mode": "compact", "param": "[Parameters].[Parametro Descripciones]",
-                                "type-v2": "paramctrl", "w": str(A), "x": str(c_fin - A), "y": R.get("y")})
-    estilo = R.find("zone-style")
-    if estilo is not None: nuevo.append(copy.deepcopy(estilo))
-    hijos = list(Hc); Hc.insert(hijos.index(C) + 1, nuevo)
+    for z in [P] + aR[aR.index(P) + 1:aR.index(Hc)] if P is not Hc else []:
+        z.set("w", str(num(z, "w") + A))
+    copias = [copy.deepcopy(u) for u in unidad]
+    n = [nid]; destino = u_fin - A
+    for c in copias:
+        delta = destino - num(c, "x"); destino += num(c, "w")
+        for z in c.iter("zone"):
+            z.set("id", str(n[0])); n[0] += 1
+            z.set("x", str(num(z, "x") + delta))
+            if z.get("type-v2") == "paramctrl": _como_filtro(z, _EMOJI)
+    for i, c in enumerate(copias): P.insert(k + 1 + i, c)
     return d[:zs] + ET.tostring(root, encoding="unicode") + d[ze + len("</zones>"):]
 
 def _controles(x, colocar):
@@ -171,7 +223,7 @@ def _controles(x, colocar):
         if not hojas & con_tooltip: continue
         enc = _en_encabezado(d, nid[0] + 1)
         if enc is not None:
-            nid[0] += 1; x = x[:ini] + enc + x[fin:]; continue
+            nid[0] += 50; x = x[:ini] + enc + x[fin:]; continue
         if colocar == "plantilla":
             m = re.search(r"<zone h='(\d+)' id='99\d+' type-v2='text' w='(\d+)' x='(\d+)' y='(\d+)'><formatted-text><run fontcolor='#44546a' fontsize='8'>ℹ️", d)
             if not m: continue
