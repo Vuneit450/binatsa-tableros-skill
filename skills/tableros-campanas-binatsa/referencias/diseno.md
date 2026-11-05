@@ -104,7 +104,7 @@ Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabez
 
 ## Parámetros estándar
 Los controles de arriba son parámetros, no filtros: Tableau no permite leer el valor de un filtro dentro de un cálculo, y los deltas lo necesitan. Cada hoja lleva el filtro "En rango" = Verdadero (fecha entre [Desde efectivo] y [Hasta efectivo]).
-- **Periodo** (lista), solo estas 13 opciones: Mes actual, Mes anterior, Trimestre actual, Trimestre anterior, Semestre actual, Semestre anterior, Año actual, Año anterior, Últimos 7 días, Últimos 30 días, Últimos 12 meses, Todo el historial y Personalizado. Por defecto: "Año actual".
+- **Periodo** (lista), solo estas 13 opciones: Mes actual, Mes anterior, Trimestre actual, Trimestre anterior, Semestre actual, Semestre anterior, Año actual, Año anterior, Últimos 7 días, Últimos 30 días, Últimos 12 meses, Todo el historial y Personalizado. Por defecto: "Personalizado", con Desde y Hasta en el rango que se quiere ver.
 - **Desde** y **Hasta** (fecha): solo cuentan con Periodo en "Personalizado"; Hasta no puede pasar de hoy.
 - **Día seleccionado** (fecha): vacío por defecto; lo llena el clic en un día.
 - **Control del giro**: lo define `referencias/giros/<giro>.md` (por ejemplo Segmento o Canal en Cobranza).

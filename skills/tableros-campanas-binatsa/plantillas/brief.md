@@ -23,7 +23,7 @@ Se llena una sola vez con las respuestas a las preguntas iniciales, para no volv
 |---|---|---|
 | 1 | | |
 - ¿Separa además por canal o producto?:
-- Periodo por defecto: Año actual (cambiar solo si el usuario lo pide)
+- Periodo por defecto: Personalizado (Desde y Hasta según el proyecto)
 
 ## Tarjetas KPI y metas
 - Tarjetas de Dirección:
