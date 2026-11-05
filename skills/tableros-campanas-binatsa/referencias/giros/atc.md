@@ -44,7 +44,7 @@ Son las cinco hojas obligatorias de `referencias/diseno.md`, adaptadas a llamada
 - **Nivel de atención:** atendidas ÷ recibidas.
 - **% Abandono > 5 s:** abandonadas con espera mayor a 5 s ÷ recibidas. Meta estándar BINATSA: 5 % (verde ≤ 5 %, rojo > 5 %).
 - **Abandono rápido ("ghost"):** abandonadas con espera menor a 6 s; se reporta aparte porque no refleja falta de atención.
-- **ASA:** espera promedio antes de ser atendido = (cola + pendiente) ÷ atendidas. Semáforo: verde ≤ 20 s, amarillo ≤ 30 s, rojo > 30 s.
+- **ASA:** espera promedio antes de ser atendido = (cola + pendiente) ÷ atendidas. Meta estándar BINATSA: 20 s (verde ≤ 20 s, rojo > 20 s).
 - **TMO (AHT):** tiempo promedio por llamada atendida = (pendiente + conversación + espera + post-llamada) ÷ atendidas. Meta estándar BINATSA: 10 min (verde ≤ 10 min, rojo > 10 min).
 - **Tipificación:** motivo con que el asesor cerró la llamada atendida. % tipificación = tipificadas ÷ atendidas.
 
@@ -65,7 +65,7 @@ Son las cinco hojas obligatorias de `referencias/diseno.md`, adaptadas a llamada
 - **Personas conectadas:** asesores distintos con actividad o llamada atendida en el periodo o franja.
 
 ## Reglas por acordar (por escrito, antes de construir)
-1. Umbral del nivel de servicio (estándar: 20 s). Las metas estándar (NS 90 %, abandono 5 %, TMO 10 min) solo cambian si el cliente pide otras; registrarlas en `brief.md`.
+1. Umbral del nivel de servicio (estándar: 20 s). Las metas estándar (NS 90 %, abandono 5 %, ASA 20 s, TMO 10 min; semáforo de dos colores: verde cumple, rojo no cumple) solo cambian si el cliente pide otras; registrarlas en `brief.md`.
 2. Umbral de abandono (estándar: 5 s) y si el abandono rápido se excluye.
 3. Qué cuenta como recibida: llave única de la llamada y qué estados se excluyen.
 4. Qué componentes suman al TMO.
