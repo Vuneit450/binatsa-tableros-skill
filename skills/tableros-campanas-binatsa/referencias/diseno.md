@@ -198,7 +198,13 @@ Tamaños:
 - Tooltip: título 14 pt, etiquetas 11 pt, valores 12 pt, secciones y cuerpo 10 pt, notas 9 y 8 pt (ver `referencias/tooltips.md`).
 - Valores marcados como "propuestos" hasta que el usuario los confirme en la primera revisión de cada cliente.
 
-## Patrón del mapa de calor con selector de métrica
-Referencia visual: `ejemplos/mapa-calor.png`.
-Escala de color: la define el proyecto, con la paleta del cliente, de claro a oscuro. El texto de cada celda cambia de color según el fondo (oscuro sobre fondo claro, blanco sobre fondo oscuro) para que el número se lea siempre con al menos 4.5:1.
-Parámetro de texto "Métrica del mapa de calor" (Gestiones, Contactos con titular, Promesas, Cuentas distintas, % contacto, % promesa, Monto recuperado). Un cálculo "Métrica seleccionada" (CASE sobre el parámetro) para el color y otro "Métrica (texto)" para la etiqueta que agrega % cuando la métrica es porcentual. Etiqueta mínima 8 pt en web.
+## Mapa de calor con selector de KPI (obligatorio en Dirección)
+Es la hoja de consulta principal de Dirección: ahí el usuario explora casi toda la información cambiando el KPI. Por eso lleva el selector con el mayor número de métricas posible.
+- **Ejes:** filas = categoría principal del giro (por ejemplo los buckets A, B y C); columnas = días del rango, con día de la semana y número ("jue 1", "vie 2"…). Ancho completo de la vista.
+- **Título** (franja oscura, como toda hoja): "🔥 ¿Qué <categoría> rinde más cada día?" y, en la línea 2, cómo se lee: "Cada celda es un <categoría> en un día; más oscuro = valor más alto. Cambia el KPI con el selector. Clic en una celda filtra el tablero por ese <categoría> y día."
+- **Selector "KPI"** dentro de la franja del título, a la derecha: parámetro de lista con **todas las métricas del giro** que se puedan calcular por categoría y día (conteos, montos, porcentajes y promedios; la lista sale de `referencias/giros/<giro>.md`). Valor por defecto: la métrica principal de la campaña.
+- **Cálculos:** "Métrica seleccionada" (CASE sobre el parámetro) para el color y "Métrica (texto)" para la etiqueta, con % o $ según la métrica.
+- **Celdas:** el valor dentro de cada celda (mínimo 8 pt en web). Escala de claro a oscuro con la paleta del cliente; el texto de la celda cambia a blanco sobre fondo oscuro para leerse con al menos 4.5:1.
+- **Interacción:** pasar el mouse resalta esa categoría en todas las hojas; clic en una celda filtra por esa categoría y llena "Día seleccionado" (ver Interactividad).
+
+Operación puede llevar otro mapa de calor (por ejemplo día contra hora) con el mismo patrón.
