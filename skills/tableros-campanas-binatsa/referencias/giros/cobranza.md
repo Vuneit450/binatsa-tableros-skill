@@ -6,7 +6,7 @@ Métricas, reglas de cálculo y vistas propias de las campañas de cobranza. El 
 - **Segmento (o bucket):** tramo de días de mora. Nombres y rangos los da cada cliente (no asumir A/B/C). Su color es una rampa del primario del cliente, de claro (menos mora) a oscuro (más mora), igual en todas las hojas.
 - **Canal:** subcampaña o producto (por ejemplo dos productos y dos tramos de mora), si el cliente separa así su cartera.
 - **Control de arriba:** Segmento o Canal, el que use el cliente (pueden ir los dos).
-- **Campos para resaltar al pasar el mouse:** Segmento, Canal y Asesor.
+- **Resaltar al pasar el mouse:** una sola acción por vista con todos los campos en común; para que se iluminen juntos, usar el mismo nombre de campo en todas las hojas (por ejemplo Asesor, Canal).
 
 ## Tarjetas
 - **Fila principal:** Monto recuperado, Pagos recibidos, Promesas de pago, Monto prometido, % cartera gestionada y % contacto con titular.
