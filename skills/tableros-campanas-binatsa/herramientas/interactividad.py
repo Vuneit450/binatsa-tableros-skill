@@ -11,7 +11,9 @@ Uso:
     python interactividad.py ... --tarjetas '^(KPI |Tarjeta )'
     python interactividad.py ... --solo-resaltar     (solo el punto 1)
 
---plan: vista → nombre visible del campo de categoría (el mismo en todas sus hojas).
+--plan: vista → campo de categoría preferido (nombre visible). Las hojas se agrupan por el campo
+        que comparten; cada grupo lleva su propia acción (orígenes sin encimarse) y una hoja que
+        no comparte categoría con otra se resalta dentro de sí misma.
 --tarjetas: expresión regular con el nombre de las hojas de tarjetas KPI de ese libro.
 Trabaja sobre una copia: nunca sobrescribe el libro de entrada.
 """
@@ -50,6 +52,42 @@ def hojas_sin_campo(x, hojas, campo, cap):
     return fuera
 
 
+NO_CATEGORIA = re.compile(r"(?i)métrica|metrica|medida|measure|kpi|selector|texto")
+
+
+def campos_de(x, h, cap):
+    """Campos de categoría (nombre visible) que muestra una hoja."""
+    i = x.find(f"<worksheet name='{h}'")
+    if i < 0:
+        return []
+    w = x[i:x.index('</worksheet>', i)]
+    vista = (w[w.find('<panes>'):] if '<panes>' in w else '') + ''.join(re.findall(r"<(?:rows|cols)>(.*?)</(?:rows|cols)>", w, re.S))
+    out = []
+    for c in re.findall(r"\[(?:none|attr|usr|wd|hr|dy|mn|tdy):([^:\]]+):[no]k\]", vista):
+        n = cap.get(c, c)
+        if n not in out and not NO_CATEGORIA.search(n):
+            out.append(n)
+    return out
+
+
+def grupos(x, hs, preferido, cap, tarj):
+    """Agrupa las hojas de una vista por el campo de categoría que comparten.
+    Cada hoja va al grupo de su campo más compartido (el preferido gana los empates);
+    una hoja que no comparte con nadie queda sola y se resalta dentro de sí misma.
+    Devuelve {campo: [hojas]} sin tarjetas ni hojas sin categoría."""
+    cs = {h: campos_de(x, h, cap) for h in hs if h not in tarj}
+    cuenta = {}
+    for f in (f for v in cs.values() for f in v):
+        cuenta[f] = cuenta.get(f, 0) + 1
+    g = {}
+    for h, fs in cs.items():
+        if not fs:
+            continue
+        f = max(fs, key=lambda f: (cuenta[f], f == preferido, -fs.index(f)))
+        g.setdefault(f, []).append(h)
+    return g
+
+
 def hojas_de(x, dash):
     m = re.search(rf"<dashboard [^>]*?name='{re.escape(dash)}'.*?</dashboard>", x, re.S)
     if not m:
@@ -79,21 +117,33 @@ def main():
     # Se quitan las acciones de resaltar al pasar el mouse que ya existan: varias por vista se anulan entre sí.
     x = re.sub(r"\s*<action [^>]*>\s*<activation auto-clear='true' type='on-hover' />.*?</action>", "", x, flags=re.S)
     cap, acc = mapa_captions(x), []
-    for i, (dash, campo) in enumerate(plan.items()):
+    for dash, campo in plan.items():
         hs = hojas_de(x, dash)
         tarj = [h for h in hs if tarj_re.search(html.unescape(h))]
-        excl = ",".join(tarj + [h for h in hojas_sin_campo(x, hs, campo, cap) if h not in tarj])
-        g = uuid.uuid4().hex.upper()
-        b = [f"    <action caption='Resaltar al pasar el mouse ({dash})' name='[Action{90000 + i}_{g}]'>",
-             "      <activation auto-clear='true' type='on-hover' />",
-             f"      <source dashboard='{dash}' type='sheet' />",
-             "      <command command='tsc:brush'>"]
-        if excl:
-            b.append(f"        <param name='exclude' value='{excl}' />")
-        b += [f"        <param name='field-captions' value='{campo}' />", f"        <param name='target' value='{dash}' />",
-              "      </command>", "    </action>"]
-        acc.append(nl.join(b))
-        print(f"  {dash}: resalta por '{campo}'; fuera: {excl or '-'}")
+        # Una acción por grupo de hojas que comparten categoría. Los orígenes no se enciman
+        # (cada hoja dispara una sola acción), así no se anulan entre sí.
+        gs = grupos(x, hs, campo, cap, tarj)
+        for f, miembros in sorted(gs.items(), key=lambda kv: -len(kv[1])):
+            fuera = [h for h in hs if h not in miembros]
+            g = uuid.uuid4().hex.upper()
+            b = [f"    <action caption='Resaltar al pasar el mouse ({dash} · {f})' name='[Action{90000 + len(acc)}_{g}]'>",
+                 "      <activation auto-clear='true' type='on-hover' />"]
+            if fuera:
+                b.append(f"      <source dashboard='{dash}' type='sheet'>")
+                b += [f"        <exclude-sheet name='{h}' />" for h in fuera]
+                b.append("      </source>")
+            else:
+                b.append(f"      <source dashboard='{dash}' type='sheet' />")
+            b.append("      <command command='tsc:brush'>")
+            if fuera:
+                b.append(f"        <param name='exclude' value='{','.join(fuera)}' />")
+            b += [f"        <param name='field-captions' value='{f}' />", f"        <param name='target' value='{dash}' />",
+                  "      </command>", "    </action>"]
+            acc.append(nl.join(b))
+            print(f"  {html.unescape(dash)} · {f}: {', '.join(html.unescape(h) for h in miembros)}")
+        sin = [h for h in hs if h not in tarj and not any(h in m for m in gs.values())]
+        if sin:
+            print(f"  {html.unescape(dash)} · sin categoría (no resaltan): {', '.join(html.unescape(h) for h in sin)}")
 
     sp = importlib.util.spec_from_file_location("descripciones", pathlib.Path(__file__).with_name("descripciones.py"))
     de = importlib.util.module_from_spec(sp); sp.loader.exec_module(de)
