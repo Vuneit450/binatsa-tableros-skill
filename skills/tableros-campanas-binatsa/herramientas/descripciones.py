@@ -115,6 +115,46 @@ def agregar(x, colocar="flotante"):
         x = x[:k] + "".join("\n      " + c for c in cols) + x[k:]
     return _controles(x, colocar)
 
+def _en_encabezado(d, nid):
+    """Mete el control en la fila de filtros del encabezado, al lado del último filtro. Devuelve d o None."""
+    import copy, xml.etree.ElementTree as ET
+    zs = d.find("<zones>"); ze = d.find("</zones>", zs)
+    if zs < 0 or ze < 0: return None
+    frag = d[zs:ze + len("</zones>")]
+    try:
+        root = ET.fromstring(frag)
+    except ET.ParseError:
+        return None
+    padre = {c: p for p in root.iter() for c in p}
+    num = lambda z, k: int(z.get(k, "0"))
+    params = [z for z in root.iter("zone") if z.get("type-v2") == "paramctrl" and num(z, "y") < 12000 and "Parametro Descripciones" not in z.get("param", "")]
+    if not params: return None
+    R = max(params, key=lambda z: num(z, "x") + num(z, "w"))
+    textos = [z for z in root.iter("zone") if z.get("type-v2") == "text" and num(z, "y") < 12000 and num(z, "x") + num(z, "w") <= num(R, "x")]
+    if not textos: return None
+    T = max(textos, key=lambda z: num(z, "w")); A = num(R, "w")
+    if num(T, "w") < A + 6000: return None
+    def ancestros(z):
+        out = []
+        while z in padre: z = padre[z]; out.append(z)
+        return out
+    aR, aT = ancestros(R), ancestros(T)
+    Hc = next((a for a in aR if a in aT), None)
+    if Hc is None: return None
+    C = R if padre.get(R) is Hc else next(a for a in aR if padre.get(a) is Hc)
+    t_fin = num(T, "x") + num(T, "w"); c_fin = num(C, "x") + num(C, "w")
+    for z in Hc.iter("zone"):
+        if z is Hc: continue
+        if t_fin <= num(z, "x") < c_fin: z.set("x", str(num(z, "x") - A))
+    for z in [T] + [a for a in aT if a is not Hc and a in ancestros(T)][:aT.index(Hc)]:
+        z.set("w", str(num(z, "w") - A))
+    nuevo = ET.Element("zone", {"h": R.get("h"), "id": str(nid), "mode": "compact", "param": "[Parameters].[Parametro Descripciones]",
+                                "type-v2": "paramctrl", "w": str(A), "x": str(c_fin - A), "y": R.get("y")})
+    estilo = R.find("zone-style")
+    if estilo is not None: nuevo.append(copy.deepcopy(estilo))
+    hijos = list(Hc); Hc.insert(hijos.index(C) + 1, nuevo)
+    return d[:zs] + ET.tostring(root, encoding="unicode") + d[ze + len("</zones>"):]
+
 def _controles(x, colocar):
     ids = [int(v) for v in re.findall(r"<zone [^>]*id='(\d+)'", x)]
     nid = [max(ids + [0]) + 1000]
@@ -129,6 +169,9 @@ def _controles(x, colocar):
         principal = d[:d.find("<devicelayouts>")] if "<devicelayouts>" in d else d
         hojas = set(re.findall(r"<zone [^>]*name='([^']*)'", principal))
         if not hojas & con_tooltip: continue
+        enc = _en_encabezado(d, nid[0] + 1)
+        if enc is not None:
+            nid[0] += 1; x = x[:ini] + enc + x[fin:]; continue
         if colocar == "plantilla":
             m = re.search(r"<zone h='(\d+)' id='99\d+' type-v2='text' w='(\d+)' x='(\d+)' y='(\d+)'><formatted-text><run fontcolor='#44546a' fontsize='8'>ℹ️", d)
             if not m: continue
