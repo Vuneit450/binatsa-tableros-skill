@@ -169,14 +169,16 @@ Aplica a todo lo que ve el cliente: títulos, subtítulos, pies, la línea ℹ�
 - cualquier frase que el usuario haya pedido omitir.
 Para la fuente, usar el nombre del reporte o del área (por ejemplo "Fuente: reporte diario de llamadas"); para la actualización, "los datos se actualizan solos". Los demás archivos de la skill remiten a esta lista; si cambia, se cambia solo aquí.
 
-## Cuándo usar cada gráfico (propuesto)
+## Gráficos adicionales: según los datos
+Además de las hojas obligatorias (mapa de calor de Dirección y las cinco de Operación), Claude elige los demás gráficos según los datos que tenga cada campaña: los que mejor respondan una pregunta de negocio útil. Cada uno lleva su pregunta en el título y se propone al usuario en el resumen de construcción. Guía para elegir:
 - Barras: comparar categorías (canales, asesores, resultados), ordenadas de mayor a menor.
-- Línea o barras por día: tendencia día a día.
-- Mapa de calor: día contra hora, o día contra canal, con selector de métrica.
+- Línea o barras por día: tendencia.
+- Mapa de calor: dos dimensiones a la vez (día contra hora, categoría contra día), con selector de métrica.
 - Embudo: etapas de un proceso (cartera, gestionadas, contacto, promesa, pago).
 - Tabla: detalle por asesor o por canal, con total general.
-- Pastel o dona: solo para 2 a 5 partes de un todo (por ejemplo cuentas sin gestión por segmento), con el % a la vista; nunca para comparar.
-- Mapa geográfico: solo cuando el dato tiene zona (por ejemplo visitas).
+- Pastel o dona: solo de 2 a 5 partes de un todo, con el % a la vista; nunca para comparar.
+- Mapa geográfico: solo cuando el dato tiene zona.
+Todos siguen las reglas de estilo: sin líneas, sin títulos de ejes, fondo transparente, ceros vacíos y colores de la paleta.
 
 ## Dispositivos
 Los dashboards se diseñan solo para computadora (2300 x 1300 px). No se diseñan vistas para teléfono ni para tableta.
