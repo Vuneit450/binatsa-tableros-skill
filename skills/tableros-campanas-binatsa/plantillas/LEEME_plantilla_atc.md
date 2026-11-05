@@ -12,6 +12,9 @@ Hecha a partir de la plantilla de Cobranza (mismo diseño, acciones y nombres in
 - **Asesores:** % Tipificación, Horas disponibles, Horas en auxiliares, Atendidas por hora y Horas conectado.
 - Metas estándar de ATC (`referencias/giros/atc.md`): NS 90 %, abandono 5 %, ASA 20 s, TMO 10 min. Abandono, ASA, TMO, demoradas y auxiliares invierten el color (bajar es mejorar).
 
+## Interactividad
+La misma de Cobranza: resaltar por Canal y por Asesor, Periodo en "Personalizado" y control "💬 Descripciones" al final de la fila de filtros.
+
 ## Selectores
 - Mapa de calor de Dirección (canal × día): Recibidas, Atendidas, Abandonadas, Nivel de servicio, Nivel de atención, % Abandono > 5 s, ASA, TMO y Demoradas; por defecto, Nivel de servicio.
 - Mapa de Operación (hora × día): Recibidas, Atendidas, Abandonadas, % atención y % abandono.
@@ -21,6 +24,5 @@ Hecha a partir de la plantilla de Cobranza (mismo diseño, acciones y nombres in
 Los mismos de la plantilla de Cobranza (`{Campaña}`, `{Cliente}`, canales, logo, colores, `https://URL-DEL-VIDEO`, `{Fuente 1}`…), más `{reporte de llamadas entrantes}` en el pie de Dirección.
 
 ## Pendiente
-1. Abrirla en Tableau y corregir lo que falle.
-2. Vistas propias del giro: Nivel de servicio (detalle) y Encuestas.
-3. La fuente de resumen conserva columnas de cobranza en cero (para no romper cálculos que no se usan); limpiarlas cuando la plantilla esté validada.
+1. Vistas propias del giro: Nivel de servicio (detalle) y Encuestas.
+2. La fuente de resumen conserva columnas de cobranza en cero (para no romper cálculos que no se usan); limpiarlas cuando la plantilla esté validada.

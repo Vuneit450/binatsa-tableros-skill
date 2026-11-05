@@ -15,7 +15,9 @@ Hecha a partir del tablero de referencia de Cobranza más reciente. Todo lo del 
 - Botones "<Vista> →" y "📖 Guía y glosario".
 - Dirección con 6 tarjetas por fila.
 - Semáforo oscuro (verde `#2e7d32`, rojo `#c62828`).
-- Resaltar al pasar el mouse por Canal y por Asesor en cada vista, sin las tarjetas.
+- Resaltar al pasar el mouse por Canal y por Asesor en cada vista, sin las tarjetas ni las hojas que no tienen ese campo.
+- Periodo arranca en "Personalizado".
+- Control "💬 Descripciones" (Mostrar / Ocultar) al final de la fila de filtros.
 - Enlace "▶ Manual en video" con dirección de marcador.
 
 ## Marcadores que se cambian en cada proyecto

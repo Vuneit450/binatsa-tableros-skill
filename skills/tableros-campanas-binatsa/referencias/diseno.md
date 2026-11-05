@@ -108,6 +108,7 @@ Los controles de arriba son parámetros, no filtros: Tableau no permite leer el 
 - **Desde** y **Hasta** (fecha): solo cuentan con Periodo en "Personalizado"; Hasta no puede pasar de hoy.
 - **Día seleccionado** (fecha): vacío por defecto; lo llena el clic en un día.
 - **Control del giro**: lo define `referencias/giros/<giro>.md` (por ejemplo Segmento o Canal en Cobranza).
+- **💬 Descripciones** (Mostrar / Ocultar): al final de la fila de filtros, con el mismo formato; ver `referencias/tooltips.md`.
 - **Selectores de métrica** (por ejemplo "KPI" o "Métrica del mapa de calor"): listas con las métricas que muestra la gráfica.
 
 **Nombres:** en español, sin pistas entre paréntesis (nada de "Desde (2000 = sin límite)" ni "Campaña (Parámetro)"). Solo se permite la unidad cuando hace falta, por ejemplo "Tolerancia (min)". La explicación de cada control va en la Guía y glosario. Los cálculos derivados se nombran igual en todos los proyectos: [Desde efectivo], [Hasta efectivo] y las banderas de periodo.

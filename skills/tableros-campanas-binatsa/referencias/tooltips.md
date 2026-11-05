@@ -17,7 +17,7 @@ Obligatorios en todo gráfico, tabla y tarjeta. Formato de 5 secciones del table
 Los colores de las secciones son decoración de lectura; el verde y el ámbar repiten los del semáforo de `referencias/diseno.md` (el ámbar en su variante oscura para texto pequeño). Gris de notas: `#757575` (4.6:1 con blanco), no uno más claro. Palabras prohibidas: "Texto visible" en `referencias/diseno.md`.
 
 ## Control "Descripciones: Mostrar / Ocultar"
-Cada vista con tooltips lleva un control "Descripciones" (Mostrar / Ocultar), junto a la fila de botones. Con "Ocultar" el tooltip deja solo el título y los datos; las secciones (de la línea divisoria hacia abajo) desaparecen sin borrarse. Se aplica con `herramientas/descripciones.py` (cada texto de sección pasa a un cálculo que solo se muestra con "Mostrar", con el mismo formato). Por defecto: "Mostrar".
+Cada vista con tooltips lleva un control "💬 Descripciones" (Mostrar / Ocultar) en la fila de filtros del encabezado, al final, junto al último filtro y con su mismo formato (título, fuente, color, contenedor y separador). Nunca flotando encima de otros objetos: para hacerle espacio se acorta el título. Las vistas sin tooltips de secciones (Guía y glosario, por ejemplo) no lo llevan. Con "Ocultar" el tooltip deja solo el título y los datos; las secciones (de la línea divisoria hacia abajo) desaparecen sin borrarse. Se aplica con `herramientas/descripciones.py` (cada texto de sección pasa a un cálculo que solo se muestra con "Mostrar", con el mismo formato). Por defecto: "Mostrar".
 
 ## En XML (.twb)
 - `<customized-tooltip><formatted-text><run …>` dentro del pane de cada worksheet.

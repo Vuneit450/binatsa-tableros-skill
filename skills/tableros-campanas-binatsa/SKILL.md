@@ -19,11 +19,12 @@ Objetivo: que cada tablero se reconozca como de BINATSA a primera vista. El esti
 | Pruebas y publicación | `referencias/publicacion.md`, `referencias/cliente-limpieza.md` |
 | Video guía | `referencias/video-guia.md` |
 | Descargar o publicar con token | `herramientas/README.md` |
+| Llevar la interactividad estándar a un libro que ya existe | `herramientas/interactividad.py` (resaltar, Periodo en Personalizado y control Descripciones) |
 
 Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas sin archivo. Si el giro no está completo, avisar y armarlo con el usuario a partir de las reglas generales.
 
 ## Flujo
-0. **Preparación (una vez):** cuenta dedicada en Tableau Cloud con un solo token (ver Seguridad). Libros plantilla BINATSA en `plantillas/`: Cobranza en `plantilla_cobranza_binatsa.twbx` (marcadores y pendientes en `LEEME_plantilla_cobranza.md`); para los giros sin plantilla, construir desde cero siguiendo `referencias/diseno.md`.
+0. **Preparación (una vez):** cuenta dedicada en Tableau Cloud con un solo token (ver Seguridad). Libros plantilla BINATSA en `plantillas/`: Cobranza (`plantilla_cobranza_binatsa.twbx`) y ATC (`plantilla_atc_binatsa.twbx`), con sus marcadores y pendientes en `LEEME_plantilla_<giro>.md`; para Retenciones y Ventas, partir de la plantilla más parecida (ATC para Retenciones) siguiendo `referencias/diseno.md`.
 1. **Arranque:** el usuario conecta la carpeta `BINATSA-Tableros/<cliente>/<campaña>/` con el logo del cliente en PNG y da el link del libro publicado. Crear `marca/`, `libro/`, `datos/`, `capturas/`, `video/` y copiar `brief.md` de `plantillas/`. Si ya existe `brief.md`, leerlo primero y no repetir lo que ya está respondido.
 2. **Libro:** descargarlo con `herramientas/descargar_libro.py --con-fuentes` (trae el extracto y, si el libro usa fuentes publicadas, también esas fuentes con sus datos); si no se puede, pedirlo al usuario en `libro/`. Guardar el original intacto (`<nombre>_v0_original.twbx`) y trabajar siempre en copias (`v1`, `v2`…).
 3. **Revisión y preguntas:** leer la estructura del libro sin abrir datos (vistas, hojas, fuentes, fórmulas, parámetros); sacar la paleta del logo y revisar el contraste; entregar un resumen (qué datos hay, qué reglas se encontraron, qué falta); hacer las preguntas con respuesta propuesta. Después, leer el extracto con sumas y conteos (`referencias/datos.md`).

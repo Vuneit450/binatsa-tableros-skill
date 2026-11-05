@@ -1,6 +1,23 @@
 # Herramientas para trabajar con Tableau desde una carpeta local
 
-Contiene `publicar_libro.py` (publica) y `crear_libro_prueba.py` (genera un libro de prueba con datos inventados). `publicar_libro.py` que publica un libro en Tableau Cloud con un token de acceso personal. **No se ha probado contra un sitio real**: la primera vez, usar un libro de prueba en un proyecto de pruebas.
+| Herramienta | Para qué |
+|---|---|
+| `descargar_libro.py` | Descarga un libro publicado (con `--con-fuentes`, también sus fuentes publicadas con datos). |
+| `publicar_libro.py` | Publica un libro en Tableau Cloud con un token de acceso personal. |
+| `crear_libro_prueba.py` | Genera un libro de prueba con datos inventados. |
+| `crear_plantilla_atc.py` | Regenera la plantilla de ATC a partir de la de Cobranza. |
+| `interactividad.py` | Lleva a un libro que ya existe la interactividad estándar: resaltar al pasar el mouse (una acción por vista), Periodo en "Personalizado" y el control "💬 Descripciones". Trabaja en una copia. |
+| `descripciones.py` | El control "💬 Descripciones" (lo usan `interactividad.py` y los generadores de plantillas). |
+| `aplicar-reglas-en-tableau.md` | Cómo aplicar a mano en Tableau las reglas de formato. |
+
+`interactividad.py`, por ejemplo:
+```bash
+python skills/tableros-campanas-binatsa/herramientas/interactividad.py libro/mi_libro_v1.twbx libro/mi_libro_v2.twbx --plan '{"Dirección": "Canal", "Operación": "Asesor"}' --tarjetas '^(KPI |Tarjeta )'
+```
+`--plan` dice, por vista, el campo de categoría que se resalta (nombre visible); `--tarjetas` es el patrón del nombre de las hojas de tarjetas KPI de ese libro.
+
+## Publicar con token
+`publicar_libro.py` publica un libro en Tableau Cloud con un token de acceso personal. **No se ha probado contra un sitio real**: la primera vez, usar un libro de prueba en un proyecto de pruebas.
 
 ## Preparación (una sola vez)
 
