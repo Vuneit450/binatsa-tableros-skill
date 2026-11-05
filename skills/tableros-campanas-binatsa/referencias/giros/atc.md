@@ -40,12 +40,12 @@ Son las cinco hojas obligatorias de `referencias/diseno.md`, adaptadas a llamada
 - **Intentos y efectivas (salientes, si las hay):** intentos = llamadas salientes únicas; efectivas = salientes de 35 s o más; % efectivas = efectivas ÷ intentos.
 
 **✅ Indicadores de servicio**
-- **Nivel de servicio (NS):** 1 − demoradas ÷ atendidas. Semáforo: verde ≥ 95 %, amarillo ≥ 90 %, rojo < 90 %.
+- **Nivel de servicio (NS):** 1 − demoradas ÷ atendidas. Meta estándar BINATSA: 90 % (verde ≥ 90 %, rojo < 90 %).
 - **Nivel de atención:** atendidas ÷ recibidas.
-- **% Abandono > 5 s:** abandonadas con espera mayor a 5 s ÷ recibidas. Semáforo: verde ≤ 5 %, amarillo ≤ 10 %, rojo > 10 %.
+- **% Abandono > 5 s:** abandonadas con espera mayor a 5 s ÷ recibidas. Meta estándar BINATSA: 5 % (verde ≤ 5 %, rojo > 5 %).
 - **Abandono rápido ("ghost"):** abandonadas con espera menor a 6 s; se reporta aparte porque no refleja falta de atención.
 - **ASA:** espera promedio antes de ser atendido = (cola + pendiente) ÷ atendidas. Semáforo: verde ≤ 20 s, amarillo ≤ 30 s, rojo > 30 s.
-- **TMO (AHT):** tiempo promedio por llamada atendida = (pendiente + conversación + espera + post-llamada) ÷ atendidas. Semáforo: verde ≤ 6 min, amarillo ≤ 8 min, rojo > 8 min.
+- **TMO (AHT):** tiempo promedio por llamada atendida = (pendiente + conversación + espera + post-llamada) ÷ atendidas. Meta estándar BINATSA: 10 min (verde ≤ 10 min, rojo > 10 min).
 - **Tipificación:** motivo con que el asesor cerró la llamada atendida. % tipificación = tipificadas ÷ atendidas.
 
 **⭐ Encuestas** (si aplica)
@@ -55,10 +55,7 @@ Son las cinco hojas obligatorias de `referencias/diseno.md`, adaptadas a llamada
 - **FCR:** clientes que dicen que se resolvió en la primera llamada ÷ respuestas.
 - **% Respuesta:** encuestas completas ÷ encuestas enviadas.
 
-**🔁 Retención** (solo si la campaña atiende cancelaciones)
-- **Cancelaciones:** atendidas tipificadas como cancelación.
-- **Retenciones:** atendidas tipificadas como retención (incluida la retención con menor producto).
-- **% Retención:** retenciones ÷ (retenciones + cancelaciones).
+**🔁 Retención:** si la campaña atiende cancelaciones, sus métricas están en `referencias/giros/retenciones.md`.
 
 **👥 Plantilla**
 - **HC:** plantilla de la campaña; la asistencia solo incluye a esos asesores.
@@ -68,14 +65,14 @@ Son las cinco hojas obligatorias de `referencias/diseno.md`, adaptadas a llamada
 - **Personas conectadas:** asesores distintos con actividad o llamada atendida en el periodo o franja.
 
 ## Reglas por acordar (por escrito, antes de construir)
-1. Umbral del nivel de servicio (estándar: 20 s) y metas de los semáforos.
+1. Umbral del nivel de servicio (estándar: 20 s). Las metas estándar (NS 90 %, abandono 5 %, TMO 10 min) solo cambian si el cliente pide otras; registrarlas en `brief.md`.
 2. Umbral de abandono (estándar: 5 s) y si el abandono rápido se excluye.
 3. Qué cuenta como recibida: llave única de la llamada y qué estados se excluyen.
 4. Qué componentes suman al TMO.
 5. Zona horaria de las franjas.
 6. Escala de la encuesta y qué respuestas cuentan como promotor, pasivo y detractor.
 7. Si hay varias campañas: cuáles suman al total.
-8. Catálogo de tipificaciones: cuáles son cancelación, retención u otros grupos.
+8. Catálogo de tipificaciones y sus grupos.
 
 ## Datos mínimos
 - **Llamadas entrantes,** una por llamada: identificador, campaña, fecha y hora de inicio, tiempos (cola, pendiente, timbrado, conversación, espera, post-llamada), resultado, asesor y tipificación.
