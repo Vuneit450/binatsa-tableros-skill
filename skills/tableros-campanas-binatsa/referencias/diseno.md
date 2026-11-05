@@ -19,21 +19,29 @@ Fila completa debajo del encabezado, sobre fondo claro (`#f3f5f9`), pegada a la 
 - Libro con varias campañas: los botones que llevan a otra campaña van en el color de esa campaña, para diferenciarlas (por ejemplo "🔴 <Otra campaña>" en el color de esa campaña).
 - A la derecha de los botones, una línea "ℹ️" de 8 pt en gris `#44546a` con la instrucción corta de la vista (por ejemplo "Filtra campaña, fechas y KPI arriba").
 
-## Vistas estándar
-Obligatorias: Dirección y Operación (arriba). Recomendada en todo proyecto: Guía de uso. Opcional, según el proyecto: Seguimiento. Cualquier otra vista adicional se define con el usuario. Todas llevan el mismo título principal, ícono del cliente, logo de BINATSA y botones de navegación (hacia todas las demás vistas).
+## Vistas
+Todas llevan el mismo encabezado y botones hacia todas las demás. Los nombres de las vistas comunes son fijos en todos los giros, para que todo tablero BINATSA se reconozca.
 
-### Guía de uso (recomendada)
-Referencia visual: `ejemplos/guia-uso.png`.
-Vista de solo texto, sin gráficos, con el mismo estilo de títulos de bloque. Se abre desde el botón "📖 Glosario" de las demás vistas; no hay una vista de glosario aparte. Contiene, en este orden:
-1. Para qué sirve cada vista: una línea por vista con la pregunta que responde.
+| Vista | Botón | Pregunta que responde | Regla |
+|---|---|---|---|
+| Dirección | 📊 Dirección | ¿Cómo va la campaña? | Obligatoria |
+| Operación | ⚙️ Operación | ¿Qué hay que corregir hoy? | Obligatoria |
+| Guía y glosario | 📖 Guía y glosario | ¿Cómo se usa y qué significa cada dato? | Obligatoria |
+| Asesores | 👥 Asesores | ¿Cómo rinde cada asesor? | Recomendada |
+| Vistas del giro | las define `giros/<giro>.md` | — | Según el giro |
+| Corte general | 📑 Corte general | ¿Cómo van todas las campañas juntas? | Solo en libros con varias campañas |
+
+### Guía y glosario
+Vista de solo texto, sin gráficos. En este orden:
+1. Para qué sirve cada vista: una línea por vista, con su pregunta.
 2. Cómo usar el tablero: las 5 reglas (los filtros de arriba afectan todo; clic en una gráfica filtra el resto; otro clic quita el filtro; pasa el mouse y te explica; los selectores cambian la gráfica).
-3. Glosario: cada métrica con su definición, tomadas del glosario de `referencias/giros/cobranza.md` y de las reglas de negocio acordadas, sin términos técnicos.
-4. Segmentos de cartera del cliente: nombre y rango de cada uno.
-5. Actualización: frecuencia real de los datos y el día del último dato.
+3. Glosario agrupado por tema, cada grupo con su emoji (por ejemplo "📞 Llamadas", "✅ Indicadores de servicio"). Cada métrica lleva su definición en palabras simples y, si tiene semáforo, sus umbrales (por ejemplo "verde ≥ 95 %"). Las definiciones salen de `giros/<giro>.md` y de las reglas acordadas en `brief.md`.
+4. Segmentos o categorías del giro, con nombre y rango.
+5. Actualización: cada cuándo se actualizan los datos y el día del último dato.
 6. A quién avisar si algo no cuadra.
 
-### Seguimiento (opcional): ¿cómo rinde cada asesor?
-Tabla por asesor con todos sus indicadores, mapa de calor con selectores de KPI y de periodo, y barras. Clic en un asesor filtra todo y deja ver solo su rendimiento; otro clic regresa a todos. Las metas NO son estándar: preguntar al usuario si el cliente tiene metas y cuáles; solo si las hay, agregar tarjetas de metas y marcar en azul oscuro lo que las cumple.
+### Asesores (recomendada)
+Tabla por asesor con sus indicadores, mapa de calor con selectores de KPI y de periodo, y barras. Clic en un asesor filtra todo; otro clic regresa a todos. Las metas no son estándar: solo si el cliente las tiene, se agregan y se marca con ✓ en verde del semáforo lo que las cumple.
 
 ## Layout
 - Todo en contenedores en MOSAICO (no flotante).
