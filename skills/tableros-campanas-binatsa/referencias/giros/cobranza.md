@@ -1,17 +1,9 @@
 # KPIs · Dashboards de Cobranza BINATSA
 
-## Tarjetas KPI
-- Todas las vistas llevan tarjetas KPI con dos deltas: "vs periodo previo" (mismo rango anterior) y "vs 7 días previos", con ▲ verde / ▼ rojo (invertir color cuando bajar es bueno, ej. Sin gestión). Los deltas siguen la selección: se calculan sobre el rango efectivo (ver Glosario) y sobre la misma selección de segmento, asesor, canal, hora, tipificación y zona en los dos periodos. Excepción: cuando el rango efectivo es de 7 días o menos, se oculta "vs 7 días previos" (coincide con el periodo previo o lo repite) y la tarjeta muestra solo "vs periodo previo". Con 8 días o más se muestran los dos.
-- Cada tarjeta debe ayudar a decidir. Descartar métricas descriptivas sin acción (día de mayor volumen, franja más cargada, pico de personas, peso fin de semana, días con operación). Preferir cobertura, % contacto titular, promesas, % promesa, $ recuperado, pagos, sin gestión, intentos por cuenta.
-
-## Anatomía de la tarjeta (propuesta, confirmar en la primera revisión de cada cliente)
-Referencia visual: `ejemplos/tarjeta-kpi.png`.
-De arriba hacia abajo. Todo va centrado excepto el título, que va a la izquierda:
-1. Título de la tarjeta: "<emoji> <métrica>", 10 pt, negrita, blanco, a la izquierda, sobre la franja del color oscuro de la marca (ver "Títulos de cada hoja" en `referencias/diseno.md`).
-2. Número grande, centrado: 28 pt en Tableau Bold, en un tono del primario que llegue a 3:1 contra el fondo (en BINATSA, turquesa oscuro `#007F84`; el turquesa del logo no llega) o en color de semáforo si la tarjeta tiene meta. Formato de módulo estructura: % con símbolo y 1 decimal, dinero con $ y miles.
-3. Dos deltas, centrados, en una línea o en dos: "▲ 4.2% vs periodo previo" y "▼ 1.1 pp vs 7 días previos", 10 pt, verde o rojo según sea mejor o peor. Con rango de 7 días o menos, solo el primero (ver Tarjetas KPI).
-4. Solo el título lleva fondo (la franja), con esquinas rectas. El número y los deltas van sin borde ni fondo.
-5. Medidas: ver "Medidas estándar" en `referencias/diseno.md` (6 por fila, hasta 2 filas). Misma altura y ancho en toda la fila.
+## Tarjetas de Cobranza
+Formato y reglas de los deltas: "Tarjetas KPI" en `referencias/diseno.md`.
+- Preferir métricas que ayuden a decidir: cobertura, % contacto con titular, promesas, % promesa, $ recuperado, pagos, sin gestión, intentos por cuenta.
+- Descartar métricas descriptivas sin acción: día de mayor volumen, franja más cargada, pico de personas, peso del fin de semana, días con operación.
 
 ## Glosario de KPIs (definiciones estándar; confirmar con el cliente si difieren)
 Este glosario es la fuente de las definiciones que se publican en la vista Guía de uso (`referencias/diseno.md`) y en los tooltips. Si cambia una definición, se cambia aquí primero.

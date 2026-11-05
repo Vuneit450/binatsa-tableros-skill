@@ -14,7 +14,7 @@ Obligatorios en todo gráfico, tabla y tarjeta. Formato tomado de los tooltips d
    - "▸ 🎯 PARA QUÉ SIRVE ESTA VISTA": la decisión que ayuda a tomar. Título en `#2E7D32`.
 7. Notas al final, en gris `#757575`: la leyenda de rangos de los segmentos (9 pt, por ejemplo "A = 06-30 días · B = 31-60 · C = 61-90", según el cliente); una nota "⚠️ Ojo: …" para limitaciones de los datos (9 pt, `#8A5A00`); una nota de contexto de la campaña (8 pt); y "Respeta los filtros … de arriba" (9 pt). Sin pie de campaña adicional.
 
-Los colores de las secciones son decoración de lectura; el verde y el ámbar repiten los del semáforo de `referencias/diseno.md` (el ámbar en su variante oscura para texto pequeño). El libro de referencia usa gris `#8A949C` en las notas, pero da 3.1:1 con blanco; usar `#757575` (4.6:1). No poner en ningún tooltip nombres de servidores o tablas, "Excel" ni sistemas internos (ver "Texto visible" en `referencias/diseno.md`).
+Los colores de las secciones son decoración de lectura; el verde y el ámbar repiten los del semáforo de `referencias/diseno.md` (el ámbar en su variante oscura para texto pequeño). El libro de referencia usa gris `#8A949C` en las notas, pero da 3.1:1 con blanco; usar `#757575` (4.6:1). Palabras prohibidas: "Texto visible" en `referencias/diseno.md`.
 
 ## En XML (.twb)
 - `<customized-tooltip><formatted-text><run …>` dentro del pane de cada worksheet.

@@ -91,11 +91,32 @@ Los controles de arriba son parámetros, no filtros: Tableau no permite leer el 
 
 **Nombres:** en español, sin pistas entre paréntesis (nada de "Desde (2000 = sin límite)" ni "Campaña (Parámetro)"). Solo se permite la unidad cuando hace falta, por ejemplo "Tolerancia (min)". La explicación de cada control va en la Guía y glosario. Los cálculos derivados se nombran igual en todos los proyectos: [Desde efectivo], [Hasta efectivo] y las banderas de periodo.
 
+## Tarjetas KPI
+Van arriba en Dirección y Operación: 6 por fila, hasta 2 filas (medidas en "Medidas estándar"). Las tarjetas reciben las acciones, nunca son origen. Qué métricas lleva cada una lo define `referencias/giros/<giro>.md`; cada tarjeta debe ayudar a decidir, no solo describir.
+
+De arriba hacia abajo (todo centrado excepto el título):
+1. **Título:** igual que cualquier hoja (ver "Títulos de cada hoja"): "<emoji> <métrica>" en 13 pt y, debajo, qué cuenta en 10 pt (por ejemplo "💰 Monto recuperado / Pagos aplicados, periodo elegido").
+2. **Número:** 28 pt, Tableau Bold, en un tono del primario del cliente que llegue a 3:1 contra el blanco (en BINATSA, `#007F84`), o en color de semáforo si la métrica tiene meta.
+3. **Dos deltas**, uno por línea:
+   ```
+   vs periodo previo: ▲ 4.2%
+   vs 7 días previos: ▼ 1.1 pp
+   ```
+   La etiqueta en 10 pt gris `#6b7680`; el valor en 12 pt negrita, verde o rojo del semáforo según mejore o empeore (invertir cuando bajar es bueno, por ejemplo "Sin gestión").
+4. Solo el título lleva fondo; el número y los deltas van sin borde ni fondo.
+
+Reglas de los deltas:
+- "Periodo previo" = el rango inmediatamente anterior de la misma duración que el rango efectivo. "7 días previos" = el mismo rango desplazado 7 días atrás.
+- Siguen la selección: se calculan sobre el rango efectivo y con la misma selección (canal, asesor, segmento, etc.) en los dos periodos.
+- Con un rango efectivo de 7 días o menos (incluido un día seleccionado), se oculta "vs 7 días previos" y queda solo "vs periodo previo".
+- Sin periodo con el cual comparar (por ejemplo "Todo el historial"), el delta muestra "-", nunca "+0.0 %".
+- Para métricas que ya son porcentaje, el delta va en puntos porcentuales (pp); para las demás, en %.
+- Cálculo en Tableau: banderas de periodo y [Desde efectivo]/[Hasta efectivo], ver `referencias/giros/<giro>.md`.
+
 ## Estilo visual
-- Encabezados de zona: franja de color de marca (en su tono oscuro si hace falta, ver Contraste), título blanco con emoji coherente + subtítulo de una línea con la pregunta de negocio.
-- KPIs grandes con número en color (adaptar a la marca del cliente).
+- Títulos de hojas y tarjetas: ver "Títulos de cada hoja" y "Tarjetas KPI".
 - Todo porcentaje con símbolo % (1 decimal). Dinero con $ y miles; M/K en cifras grandes. Si el % se corta en celdas angostas (p. ej. mapa de calor dentro del tablero), avisar y proponer sin decimales o ensanchar; nunca dejar el número sin %.
-- Barras de un solo color: resaltar la más alta (acento) con su número arriba, resto neutro. Barras apiladas por segmento usan el paso que le toca a cada segmento en la rampa de segmentos (ver Paleta): la rampa es la jerarquía de mora y es la misma en todas las hojas.
+- Barras de un solo color: resaltar la más alta (acento) con su número arriba, resto neutro. Barras apiladas por una categoría ordenada del giro (por ejemplo segmentos de mora) usan el paso que le toca en la rampa (ver Paleta), igual en todas las hojas.
 - Etiquetas de valor en gráficos: si el valor de una marca es 0 o nulo, no se muestra su etiqueta, para no saturar la gráfica con datos innecesarios. Aplica a barras, mapa de calor y demás gráficos; la marca o la celda, si existe, se queda sin número. (Las tarjetas KPI sin datos siguen mostrando "-", ver "Estados vacíos y datos parciales".)
 - Tablas: una celda con valor 0 o nulo muestra "-" (un guion) en lugar del número, para que la celda no quede vacía ni muestre un 0 que se lea como dato.
 - Sin ruido: nada de gráficos huérfanos, hojas visibles que el cliente no consulta (ocultas; acceso por "Ir a hoja"), ni calculados sin uso.
@@ -117,8 +138,14 @@ Los controles de arriba son parámetros, no filtros: Tableau no permite leer el 
 - En un gráfico con datos, una marca con valor 0 o nulo no muestra etiqueta; en una tabla, la celda muestra "-" (ver "Etiquetas de valor en gráficos"). Si todo el gráfico está en 0 o nulo, se muestra el mensaje de "sin datos".
 - Si un dato solo existe para parte del periodo (por ejemplo el detalle por hora de un solo día), decirlo en pantalla; no se rellena ni se estima.
 
-## Texto visible
-Ningún texto visible del dashboard (títulos, subtítulos, pies, tooltips y Guía de uso) puede mencionar nombres de servidores, bases de datos o tablas (por ejemplo Redshift), la palabra "servidor", "Excel", sistemas internos (por ejemplo WFM) ni "el más grande" o "el más completo". Para la fuente, usar el nombre del reporte o del área (por ejemplo "Fuente: reporte diario de llamadas"); para la actualización, "los datos se actualizan solos". Es la misma regla del video guía.
+## Texto visible (lista única de palabras prohibidas)
+Aplica a todo lo que ve el cliente: títulos, subtítulos, pies, la línea ℹ️, tooltips, Guía y glosario, nombres de parámetros y el video guía. Ningún texto puede mencionar:
+- nombres de servidores, bases de datos, esquemas o tablas (por ejemplo Redshift o "esquema.tabla"), ni la palabra "servidor";
+- "Excel" ni otra herramienta interna de trabajo;
+- sistemas internos (por ejemplo WFM, el CRM por su nombre);
+- "el más grande" o "el más completo";
+- cualquier frase que el usuario haya pedido omitir.
+Para la fuente, usar el nombre del reporte o del área (por ejemplo "Fuente: reporte diario de llamadas"); para la actualización, "los datos se actualizan solos". Los demás archivos de la skill remiten a esta lista; si cambia, se cambia solo aquí.
 
 ## Cuándo usar cada gráfico (propuesto)
 - Barras: comparar categorías (canales, asesores, resultados), ordenadas de mayor a menor.
@@ -156,7 +183,7 @@ Tamaños:
 - Título de bloque (zona, gráfico, tabla y tarjeta KPI): 13 pt en Tableau Semibold, blanco sobre franja; subtítulo de 10 pt en Tableau Light, en un tono claro del primario.
 - Subtítulo bajo el título principal: 10 pt, en el color de texto secundario.
 - Botón de navegación: Tableau Bold 11 pt, blanco sobre el color de marca.
-- Etiquetas de ejes y marcas: 9 pt (mínimo 8 en web). Delta de tarjeta: 10 pt. Contenido de tablas: 10 pt; encabezados de tabla: 10 pt en Semibold. Pie "Cómo leer": 9 pt en el color de texto secundario.
+- Etiquetas de ejes y marcas: 9 pt (mínimo 8 en web). Deltas de tarjeta: etiqueta 10 pt, valor 12 pt negrita. Contenido de tablas: 10 pt; encabezados de tabla: 10 pt en Semibold. Pie "Cómo leer": 9 pt en el color de texto secundario.
 - Tooltip: título 14 pt, etiquetas 11 pt, valores 12 pt, secciones y cuerpo 10 pt, notas 9 y 8 pt (ver `referencias/tooltips.md`).
 - Valores marcados como "propuestos" hasta que el usuario los confirme en la primera revisión de cada cliente.
 

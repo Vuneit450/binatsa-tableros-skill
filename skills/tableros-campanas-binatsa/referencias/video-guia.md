@@ -105,7 +105,7 @@ Con capturas reales no se transforma la imagen, porque se deformaría: se coloca
 
 ## Reglas de contenido
 - Hablar a un usuario nuevo: frases cortas, una idea por plano, y siempre decir qué afecta cada filtro o clic.
-- Prohibido en el texto visible: nombres de servidores o bases de datos (por ejemplo Redshift), la palabra "servidor", "Excel", "más grande" o "más completo", sistemas internos (por ejemplo WFM) y cualquier frase de datos que el usuario haya pedido omitir. Decir "los datos se actualizan solos". Es la misma regla del texto visible del dashboard (ver `referencias/diseno.md`).
+- Texto visible: aplicar la lista única de palabras prohibidas ("Texto visible" en `referencias/diseno.md`), incluidos los textos en pantalla y las capturas. Decir "los datos se actualizan solos".
 - No presentar dos veces lo mismo; si ya se mostró un tooltip, no repetirlo.
 - Las capturas pueden traer palabras prohibidas en los botones o los títulos del tablero: recortarlas, difuminarlas o taparlas.
 
