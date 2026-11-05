@@ -1,46 +1,70 @@
-# Publicación y monitoreo · Dashboards de Cobranza BINATSA
+# Publicación y monitoreo · Tableros de campañas BINATSA
+
+Las reglas de diseño están en `referencias/diseno.md`; aquí solo se verifican.
 
 ## Checklist antes de publicar
-- [ ] Sin marcas seleccionadas y parámetros en su valor por defecto (en web quedan guardados en el borrador).
-- [ ] Controles de arriba como parámetros (Periodo, Desde, Hasta y el control del giro), en su valor por defecto; Día seleccionado vacío.
-- [ ] Todos los % con símbolo; dinero con $ y miles.
-- [ ] Tooltips completos en todas las hojas, con las cinco secciones.
+**Estado**
+- [ ] Sin marcas seleccionadas; parámetros en su valor por defecto (en edición web quedan guardados en el borrador).
+- [ ] Tamaño fijo, 2300 x 1300 px, en todas las vistas.
+
+**Encabezado y botones**
+- [ ] Título "<Campaña> · <Vista>" y subtítulo "<Cliente> · <pregunta>"; logo del cliente a la izquierda y de BINATSA a la derecha, igual en todas las vistas.
+- [ ] Botones "<Vista> →" que funcionan, con color por destino (texto blanco a 4.5:1), y "📖 Guía y glosario".
+- [ ] "▶ Manual en video" con el enlace real al video de este tablero (no el marcador).
+- [ ] Línea ℹ️ junto a los botones.
+
+**Vistas**
+- [ ] Dirección, Operación y Guía y glosario presentes (más las del giro que se acordaron).
+- [ ] Dirección con el mapa de calor y su selector KPI; Operación con sus cinco hojas obligatorias.
+
+**Tarjetas**
+- [ ] 6 por fila, hasta 2 filas.
+- [ ] Deltas correctos: "-" sin periodo para comparar; "0.0" en gris cuando no hay cambio; ▲▼ con el semáforo oscuro e invertidos cuando bajar es bueno.
+- [ ] "vs 7 días previos" oculto con rangos de 7 días o menos. Probado con un rango corto y uno largo.
+
+**Estilo**
+- [ ] Sin ejes ni títulos de ejes; ceros vacíos en gráficos y "-" en tablas.
+- [ ] Tablas centradas y con totales.
+- [ ] Categorías (canales, segmentos) con la paleta del cliente, iguales en todas las hojas.
+- [ ] Asesores por nombre, nunca por login o ID.
+- [ ] Todo % con símbolo; dinero con $ y miles.
+
+**Textos**
+- [ ] Tooltips de 5 secciones en todas las hojas visibles.
 - [ ] Ningún texto visible usa palabras de la lista única ("Texto visible" en `referencias/diseno.md`).
-- [ ] Tarjetas KPI con los dos deltas y color de ▲▼ correcto (con rango de 7 días o menos, solo "vs periodo previo"; probar con un rango corto y uno largo).
-- [ ] Título principal de 20 pt en negrita, blanco sobre franja, con el formato "Cobranza <Cliente> · <Vista>" y su subtítulo; títulos de bloque de 13 pt con subtítulo de 10 pt; medidas de la sección "Medidas estándar" respetadas.
-- [ ] Botones de navegación funcionan y cumplen el formato (164 x 36 px, "<Vista> →", color por destino con texto blanco a 4.5:1, "📖 Guía y glosario" en gris y, cuando el video esté publicado, "▶ Manual en video"); ícono del cliente a la izquierda y logo de BINATSA a la derecha, en la misma posición en todas las vistas.
-- [ ] Información sin bordes ni fondos (todo transparente; solo los títulos y los botones de navegación pueden llevarlos); mosaico.
-- [ ] Todo centrado, menos los títulos (de gráficos, de tablas y encabezados de zona), a la izquierda.
-- [ ] Tablas centradas y con totales. Gráficos sin líneas, con fondo transparente y sin títulos de ejes; los valores se leen por etiquetas, sin etiqueta en los valores 0 o nulos de los gráficos y con "-" en las celdas 0 o nulas de las tablas.
-- [ ] Tamaño: modo Fijo, 2300 x 1300 px en todas las vistas.
-- [ ] Prueba de interacción hecha (ver sección siguiente) y reportada.
-- [ ] Cifras cuadradas contra la fuente en al menos un caso de control.
-- [ ] Publicar sobre el workbook existente; credenciales incrustadas (las pone el usuario desde Desktop).
-- [ ] Después de publicar: vistas, fuentes, hora de Modificado y actualización de extracción OK.
-- [ ] Dashboard publicado y probado: hacer el video guía (`referencias/video-guia.md`), último paso de la entrega.
+- [ ] Ningún marcador sin llenar: buscar `{` en títulos, tooltips y Guía y glosario (`{Campaña}`, `{Cliente}`, `{Fuente 1}`, etc.).
+
+**Datos**
+- [ ] Caso de control cuadrado contra la fuente (`referencias/datos.md`).
+- [ ] Prueba de interacción hecha y reportada (sección siguiente).
 
 ## Prueba de interacción (obligatoria)
-La mayoría de los gráficos deben interactuar entre sí; cuáles quedan fuera depende del proyecto. No darlo por hecho: probarlo en el dashboard abierto en el navegador, en todas las vistas (como mínimo Dirección y Operación).
-1. Hacer una lista de las hojas visibles del dashboard (gráficos, tablas y tarjetas KPI).
-2. Por cada gráfico, hacer clic en una marca y comprobar qué hojas se actualizan, incluidas las tarjetas KPI. En las tarjetas comprobar que el valor y los deltas siguen la selección (con un día seleccionado, el delta de 7 días se oculta). Anotar cuáles no respondieron.
-3. Limpiar la selección (clic fuera de las marcas) y comprobar que todo vuelve al estado inicial.
-4. Corregir lo que no responda (dimensión de enlace faltante, acción mal configurada) y repetir desde el paso 2.
-5. Reportar al usuario en una tabla corta: hoja, ¿filtra a las demás?, ¿responde a las demás?. Declarar cuáles no interactúan y por qué; deben ser la minoría. Si son muchas, revisar antes de publicar.
-6. Dejar el dashboard sin marcas seleccionadas antes de publicar.
+Probarla en el tablero abierto en el navegador, en todas las vistas. No darla por hecha.
+1. Hacer la lista de hojas visibles de la vista (gráficos, tablas y tarjetas).
+2. **Clic:** en cada gráfico, hacer clic en una marca y anotar qué hojas se actualizan, incluidas las tarjetas (su valor y sus deltas deben seguir la selección).
+3. **Clic en un día:** los gráficos se filtran; las tarjetas no cambian (o, si se activó "Día seleccionado", muestran ese día y ocultan el delta de 7 días).
+4. **Clic en la categoría principal** (segmento o canal): además del filtro, cambia el parámetro de arriba.
+5. **Pasar el mouse:** los datos hermanos se iluminan en todas las hojas que tienen el campo; las tarjetas no se apagan.
+6. **Limpiar** (otro clic o clic fuera): todo vuelve al estado inicial.
+7. Corregir lo que no responda (campo de enlace faltante o acción mal configurada) y repetir.
+8. Reportar al usuario en una tabla corta: hoja, ¿filtra a las demás?, ¿responde a las demás? Declarar cuáles no interactúan y por qué; deben ser la minoría.
+9. Dejar el tablero sin marcas seleccionadas.
 
 ## Publicación
-- Publicar SOBRE el workbook existente (mismo nombre y proyecto) para conservar programación y credenciales; con otro nombre se pierde la programación.
-- La contraseña incrustada solo se fija publicando desde Desktop con "Incrustar contraseña" (en web no hay campo). Las credenciales las captura siempre el usuario.
+- **Siempre sobre el libro existente** (mismo nombre y proyecto), para conservar la programación y las credenciales. Con otro nombre se pierde la programación.
+- **Quién publica:** la sesión, con `herramientas/publicar_libro.py`. Primero sin `--publicar` (simula y dice si crearía o sobrescribiría), después con `--publicar`. Fuera del proyecto de pruebas exige `--confirmo-produccion` y la confirmación del usuario en ese momento. Si no hay token, publica el usuario desde Tableau.
+- **Contraseña de la fuente:** solo se incrusta desde Tableau Desktop con "Incrustar contraseña", y la captura siempre el usuario. Después de publicar por API, revisar en la pestaña Conexiones que siga incrustada; si se perdió, el usuario la vuelve a incrustar desde Desktop.
+- **Registro:** anotar en `brief.md` la fecha, el archivo, el proyecto y qué cambió.
+- **Después de publicar:** revisar vistas, fuentes, hora de "Modificado" y que la actualización corra ("Ejecutar ahora").
 
 ## Mantenimiento después de la entrega
-1. Todo cambio pedido por el cliente se hace en una copia versionada del libro, nunca directo sobre el publicado.
-2. Probar con el checklist antes de publicar, y publicar sobre el workbook existente.
-3. Registrar el cambio: fecha, qué cambió y quién lo pidió.
-4. Si cambia la definición de una métrica o una regla de negocio, actualizar a la vez el glosario, la Guía de uso y los tooltips, y repetir el caso de control (`referencias/datos.md`).
-5. Si el cambio afecta lo que muestra el video guía, rehacer las escenas afectadas y entregar una versión nueva (`referencias/video-guia.md`).
+1. Todo cambio se hace en una copia versionada del libro, nunca directo sobre el publicado.
+2. Pasar el checklist y la prueba de interacción antes de publicar.
+3. Registrar el cambio en `brief.md`: fecha, qué cambió y quién lo pidió.
+4. Si cambia una métrica o una regla de negocio, actualizar a la vez el giro (`referencias/giros/<giro>.md`), la Guía y glosario y los tooltips, y repetir el caso de control.
+5. Si el cambio afecta lo que muestra el video guía, rehacer las escenas afectadas, entregar una versión nueva y actualizar el enlace "▶ Manual en video" (`referencias/video-guia.md`).
 
-## Monitoreo de actualización
-- Revisar en la pestaña Actualizaciones de la extracción del workbook: estado, hora de la última corrida y programación activa.
-- Tras cada publicación, verificar que la programación sigue vigente y lanzar "Ejecutar ahora" para confirmar que corre sin error.
-- Causas típicas de fallo: contraseña no incrustada (fallo en "Insertado"), credenciales vencidas, cambio en la fuente. 5 fallos seguidos suspenden la programación.
-- Alertas: ofrecer automatizar el aviso al canal que el usuario elija (correo de Tableau al correo del canal de Slack u otro) y una tarea programada de revisión si lo pide; si se crea, usar las herramientas de tareas programadas, no cron local.
+## Monitoreo de la actualización
+- Revisar en la pestaña de actualizaciones del libro: estado, hora de la última corrida y programación activa.
+- Causas típicas de fallo: contraseña no incrustada, credenciales vencidas o un cambio en la fuente. Cinco fallos seguidos suspenden la programación.
+- Alertas: ofrecer automatizar el aviso al canal que eligió el usuario (por ejemplo, el correo de Tableau reenviado al canal de Slack) y una revisión programada si la pide; si se crea, usar las herramientas de tareas programadas, no cron local.

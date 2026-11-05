@@ -84,8 +84,6 @@ Con la herramienta de opción múltiple si existe (en Claude Code, AskUserQuesti
 12. Producción se toca solo en el paso 8, con confirmación del usuario en ese momento.
 
 ## Tableau: cómo se trabaja
-- **Quién publica:** la sesión, con `herramientas/publicar_libro.py` y el token. Si no hay token, publica el usuario desde Tableau.
-- **Publicar siempre sobre el libro existente** (mismo nombre y proyecto) para conservar la programación y las credenciales. La contraseña incrustada solo se fija desde Tableau Desktop.
-- **Cada publicación queda registrada** (`publicaciones.log` y `brief.md`) para poder volver a la versión anterior.
+- **Publicar, verificar y registrar:** ver "Publicación" en `referencias/publicacion.md` (siempre sobre el libro existente, simular primero y revisar la contraseña incrustada después).
 - **Edición web:** autoguarda como borrador y "Publicar" sobrescribe; no deja ajustar anchos arrastrando; las hojas ocultas se abren desde "Ir a hoja".
 - **Herramientas** (probar cada una primero en el proyecto de pruebas): servidor MCP oficial (leer fuentes publicadas y consultar cifras agregadas); `tableauserverclient` (descargar y publicar); API de Hyper (leer extractos en local); navegador (la revisión visual, lo único que muestra el tablero tal como lo ve el usuario).
