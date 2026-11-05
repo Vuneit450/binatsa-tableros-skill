@@ -72,28 +72,24 @@ El título va sobre una franja del color oscuro de la marca, alineado a la izqui
 Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabezado): sirven solo como idea general hasta que se actualicen.
 
 ## Interactividad
-- La mayoría de los gráficos se comunican entre sí: clic en una marca filtra los demás. Cuáles quedan fuera depende del proyecto (por ejemplo, un gráfico con otra fuente de datos o sin campos en común) y se declaran en el reporte con el motivo. Las tarjetas KPI son destino, no origen.
-- Patrón de comunicación de referencia (tomado de los tableros de referencia; no es exacto, cada proyecto lo adapta):
-  - Cada gráfico o tabla es origen de una acción de filtro al seleccionar, con "todos los campos" que comparte con las demás hojas, y todas las demás hojas del dashboard como destino.
-  - Las tarjetas KPI nunca son origen; solo reciben.
-  - Orígenes típicos en Dirección: segmento, tendencia día a día, canal y promesas por día. En Operación: horas, asesores, resultados o tipificaciones, cobertura por segmento, sin gestión, gestiones por hora y visitas.
-  - Se excluye como destino la hoja que viene de otra fuente de datos (por ejemplo, una encuesta que no comparte campos con las llamadas).
-  - Clic en un segmento: además del filtro, una acción de parámetro llena el parámetro "Segmento", para que lo que depende del segmento elegido (tarjetas, métricas) se adapte.
-  - Al pasar el mouse sobre un segmento se resalta ese segmento en todas las hojas (acción de resaltar al pasar el mouse, a nivel del dashboard).
-- Implementación en las tarjetas KPI: los periodos se calculan con banderas por fila a partir de los parámetros de fecha (ver `referencias/giros/cobranza.md`) y cada KPI se calcula una vez por periodo con IF bandera THEN medida END. Así las tarjetas son destino normal de las acciones de filtro de segmento, asesor, canal, hora, tipificación y zona: esos filtros no tocan las fechas y el periodo previo sigue disponible, de modo que los deltas siguen la selección. La fecha es la excepción: si un clic filtrara por día, desaparecerían las filas de los demás periodos. Por eso el día NO va en una acción de filtro: un clic en un día dispara una acción de parámetro que llena "Día seleccionado" (fecha) y todo el dashboard usa [Desde efectivo] y [Hasta efectivo]. La parte del día seleccionado es un patrón propuesto: validarlo en el primer dashboard de cada cliente.
-- La verificación obligatoria está en `referencias/publicacion.md` (Prueba de interacción).
-- Preferir tipos de gráfico que admitan segmentador/parámetro.
-- Controles globales arriba: Periodo, Desde, Hasta y, si el proyecto lo necesita, Canal o Segmento. Todos son PARÁMETROS, no filtros: Tableau no permite leer el valor de un filtro dentro de un cálculo, y los deltas y el periodo previo lo necesitan. Desde y Hasta solo cuentan cuando Periodo es "Personalizado". Un campo calculado "En rango" (fecha entre [Desde efectivo] y [Hasta efectivo]) va en los filtros de cada hoja, con valor Verdadero.
-- En edición web NO dejar marcas seleccionadas ni parámetros cambiados antes de publicar.
+- **Clic en una marca filtra su vista.** Cada gráfico y tabla es origen de una acción de filtro al seleccionar, con destino todas las hojas de su misma vista (incluidas las tarjetas KPI) y "todos los campos" en común. Las tablas por asesor filtran solo por Asesor. Las acciones no pasan a otras vistas.
+- **Otro clic, o un clic fuera de las marcas, quita el filtro** y todo regresa al estado inicial.
+- **Las tarjetas KPI reciben, nunca son origen.**
+- **Clic en un día (acción de parámetro).** Los gráficos con la fecha en el eje no usan acción de filtro, porque dejaría a las tarjetas sin periodo previo y los deltas saldrían mal. Un clic en un día llena el parámetro "Día seleccionado"; al limpiar la selección, el parámetro vuelve a vacío. Todos los cálculos de periodo (ver `referencias/giros/<giro>.md`) usan [Desde efectivo] y [Hasta efectivo], que toman ese día si hay uno elegido. Así las tarjetas muestran el día elegido contra el día anterior y contra 7 días antes.
+- **Respaldo:** si en la plantilla la acción de parámetro no se limpia bien o los demás gráficos no responden al día, usar una acción de filtro normal en esos gráficos de fecha y quitar de su destino las tarjetas KPI. Avisar al usuario cuál quedó.
+- Quedan fuera solo las hojas que no comparten campos (por ejemplo, una encuesta de otra fuente). Se declaran en el reporte de la prueba de interacción con su motivo; deben ser la minoría.
+- Verificación obligatoria: "Prueba de interacción" en `referencias/publicacion.md`.
+- En edición web no dejar marcas seleccionadas ni parámetros cambiados antes de publicar.
 
 ## Parámetros estándar
-Mismos nombres en todos los proyectos, en español y sin pistas entre paréntesis (la explicación va en la Guía de uso):
-- Periodo (lista): Mes actual, Mes anterior, Trimestre actual, Trimestre anterior, Semestre actual, Semestre anterior, Año actual, Año anterior, Últimos 7 días, Últimos 30 días, Últimos 12 meses, Todo el historial y Personalizado. Valor por defecto: "Año actual" (el proyecto puede cambiarlo si el usuario lo pide).
-- Desde (fecha) y Hasta (fecha): solo cuentan si Periodo es "Personalizado"; Hasta no puede pasar de hoy. Indicar el rango válido en la Guía de uso.
-- Día seleccionado (fecha): vacío por defecto; lo llena la acción de parámetro al hacer clic en un día.
-- Segmento (lista, "Todos"): segmentos de cartera del cliente. Si el proyecto separa por canal o producto, usar además Canal (lista, "Todos").
-- KPI y Métrica del mapa de calor (listas): selectores de la métrica que muestran las gráficas.
-Cualquier otro parámetro lo define el proyecto, con nombre en español y sin pistas entre paréntesis. Los cálculos que derivan de estos (Desde efectivo, Hasta efectivo, banderas de periodo) se nombran igual en todos los proyectos.
+Los controles de arriba son parámetros, no filtros: Tableau no permite leer el valor de un filtro dentro de un cálculo, y los deltas lo necesitan. Cada hoja lleva el filtro "En rango" = Verdadero (fecha entre [Desde efectivo] y [Hasta efectivo]).
+- **Periodo** (lista), solo estas 13 opciones: Mes actual, Mes anterior, Trimestre actual, Trimestre anterior, Semestre actual, Semestre anterior, Año actual, Año anterior, Últimos 7 días, Últimos 30 días, Últimos 12 meses, Todo el historial y Personalizado. Por defecto: "Año actual".
+- **Desde** y **Hasta** (fecha): solo cuentan con Periodo en "Personalizado"; Hasta no puede pasar de hoy.
+- **Día seleccionado** (fecha): vacío por defecto; lo llena el clic en un día.
+- **Control del giro**: lo define `referencias/giros/<giro>.md` (por ejemplo Segmento o Canal en Cobranza).
+- **Selectores de métrica** (por ejemplo "KPI" o "Métrica del mapa de calor"): listas con las métricas que muestra la gráfica.
+
+**Nombres:** en español, sin pistas entre paréntesis (nada de "Desde (2000 = sin límite)" ni "Campaña (Parámetro)"). Solo se permite la unidad cuando hace falta, por ejemplo "Tolerancia (min)". La explicación de cada control va en la Guía y glosario. Los cálculos derivados se nombran igual en todos los proyectos: [Desde efectivo], [Hasta efectivo] y las banderas de periodo.
 
 ## Estilo visual
 - Encabezados de zona: franja de color de marca (en su tono oscuro si hace falta, ver Contraste), título blanco con emoji coherente + subtítulo de una línea con la pregunta de negocio.

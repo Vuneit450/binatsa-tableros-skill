@@ -2,7 +2,7 @@
 
 ## Checklist antes de publicar
 - [ ] Sin marcas seleccionadas y parámetros en su valor por defecto (en web quedan guardados en el borrador).
-- [ ] Controles por defecto correctos (segmento como filtro; Desde y Hasta como parámetros de fecha).
+- [ ] Controles de arriba como parámetros (Periodo, Desde, Hasta y el control del giro), en su valor por defecto; Día seleccionado vacío.
 - [ ] Todos los % con símbolo; dinero con $ y miles.
 - [ ] Tooltips completos en todas las hojas, con las cinco secciones.
 - [ ] Ningún texto visible menciona servidores, tablas, Excel ni sistemas internos.
