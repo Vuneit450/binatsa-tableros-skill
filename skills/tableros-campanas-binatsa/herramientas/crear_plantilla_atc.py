@@ -215,7 +215,7 @@ for fam, f in F.items():
         pon(f"K_{fam}_{suf}", fo, f"{f['t']} · {suf[0]} ({ {'g': 'mejora', 'r': 'empeora', 'n': 'sin cambio'}[suf[1]] })")
 
 # tablas, embudos y selectores
-pon("A_Asig", agg(F["Pago"], CUR), "Recibidas", "integer", FMT["n"])
+pon("A_Asig", agg(F["Tasa"], CUR), "Atendidas", "integer", FMT["n"])
 pon("A_Prom", agg(F["PTP"], CUR), "Nivel de servicio", "real", FMT["p"])
 for nombre, cap, col in [("F_Asig", "① Recibidas", "recibidas_dia"), ("F_Marc", "② Atendidas", "atendidas_dia"),
                          ("F_Conn", "③ En nivel de servicio", "en_nivel_dia"), ("F_Ptp", "④ Tipificadas", "tipificadas_dia"),
@@ -272,6 +272,14 @@ x = x.replace("caption='KPI (canal)'", "caption='KPI'")
 # "¿Cuánto entra cada día?": recibidas en lugar de llamadas salientes
 i = x.index("<worksheet name='Tendencia llamadas'"); j = x.index("</worksheet>", i)
 x = x[:i] + x[i:j].replace("llamadas_salientes_dia", "recibidas_dia").replace("llamadas_contestadas_dia", "atendidas_dia").replace("pago_dia", "abandonadas_dia") + x[j:]
+
+
+# "¿Rápido o a tiempo?": dispersión de asesores con TMO y nivel de servicio
+i = x.index("<worksheet name='Asesores dispersión'"); j = x.index("</worksheet>", i)
+w = x[i:j].replace("K_Llam_", "K_Cont_").replace("K_Pago_", "K_PTP_")
+x = x[:i] + w + x[j:]
+x = x.replace("⚖️ ¿Volumen o calidad?", "⚖️ ¿Rápido o a tiempo?")
+x = x.replace("Cada punto es un asesor: abandonadas (horizontal) contra recibidas (vertical).", "Cada punto es un asesor: TMO (horizontal) contra nivel de servicio (vertical). Arriba a la izquierda = rápido y a tiempo.")
 
 # ================= 3. Tarjetas: título, formato y tooltip =================
 def tooltip(fam, f):
@@ -387,7 +395,7 @@ CAP.update({"Calc_Asesor": "Asesor", "Calc_Canal": "Canal", "LS_Canal": "Canal",
             "recibidas_dia": "Recibidas", "atendidas_dia": "Atendidas", "abandonadas_dia": "Abandonadas"})
 EMO = {"Asesor": "👤", "Canal": "🧩", "Día": "📅", "Hora": "⏰", "Tipificación": "🏷️"}
 HOJAS = {
- "Asesores dispersión": ("Asesor: volumen y abandono", "Cada punto es un asesor.", "Las llamadas recibidas y abandonadas de cada asesor.", "Suma del periodo por asesor.", "Arriba = más volumen; a la derecha = más abandono.", "Ver qué asesores cargan más volumen y dónde se pierde más."),
+ "Asesores dispersión": ("Asesor: rapidez y servicio", "Cada punto es un asesor.", "El TMO y el nivel de servicio de cada asesor.", "Cálculo del periodo por asesor.", "Arriba a la izquierda = rápido y a tiempo; abajo a la derecha = necesita apoyo.", "Ver quién atiende rápido y a tiempo, y quién necesita apoyo."),
  "Asesores llamadas": ("Atendidas por asesor", "Llamadas atendidas por cada asesor.", "Cuántas llamadas atendió cada asesor en el rango.", "Suma de llamadas atendidas por asesor.", "De mayor a menor; clic en un asesor filtra la vista.", "Ver quién sostiene la operación y quién necesita apoyo."),
  "Asesores tabla": ("Resumen por asesor", "Una fila por asesor con sus llamadas, nivel de servicio y tiempos.", "Llamadas, nivel de servicio y tiempos de cada asesor.", "Cada columna es una métrica del periodo; la última fila es el total.", "Compara cada asesor contra el total y contra la meta.", "Detectar quién necesita apoyo hoy."),
  "Comparativo canal": ("KPI elegido por canal y día", "El KPI del selector, para un canal en un día.", "El KPI elegido por canal y día.", "Cada celda calcula el KPI con las llamadas de ese canal en ese día.", "Más oscuro = valor más alto. Clic en una celda filtra la vista.", "Ver qué canal y qué día se salen de la meta."),
