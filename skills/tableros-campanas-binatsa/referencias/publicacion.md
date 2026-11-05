@@ -35,6 +35,7 @@ Las reglas de diseño están en `referencias/diseno.md`; aquí solo se verifican
 - [ ] Ningún marcador sin llenar: buscar `{` en títulos, tooltips y Guía y glosario (`{Campaña}`, `{Cliente}`, `{Fuente 1}`, etc.).
 
 **Datos**
+- [ ] Todas las fuentes con extracción (no en vivo) y actualización programada, para que el libro descargado traiga datos.
 - [ ] Caso de control cuadrado contra la fuente (`referencias/datos.md`).
 - [ ] Prueba de interacción hecha y reportada (sección siguiente).
 

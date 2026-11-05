@@ -9,6 +9,7 @@ Variables de entorno (las configura el usuario; nunca se escriben en archivos ni
 Uso:
   python descargar_libro.py --listar-libros --proyecto "Cliente X"
   python descargar_libro.py --proyecto "Cliente X" --nombre "Cobranza Tarjetas" --carpeta libro/
+  python descargar_libro.py --proyecto "Cliente X" --nombre "Cobranza Tarjetas" --con-fuentes   (también las fuentes publicadas, en datos/)
 
 Guarda el libro como <carpeta>/<nombre>_v0_original.twbx y nunca sobrescribe un archivo existente.
 Si el libro trae extracto, baja datos reales: la carpeta de destino debe ser la carpeta privada del
@@ -36,6 +37,9 @@ def main():
     ap.add_argument("--nombre", help="nombre del libro en Tableau")
     ap.add_argument("--carpeta", default="libro", help="carpeta de destino (por defecto libro/)")
     ap.add_argument("--listar-libros", action="store_true", help="solo lista los libros del proyecto")
+    ap.add_argument("--con-fuentes", action="store_true",
+                    help="también descarga, con su extracción, las fuentes publicadas que usa el libro")
+    ap.add_argument("--carpeta-datos", default="datos", help="carpeta para las fuentes publicadas (por defecto datos/)")
     args = ap.parse_args()
 
     faltan = [v for v in REQUERIDAS if not os.environ.get(v)]
@@ -74,8 +78,27 @@ def main():
             if destino.exists():
                 error(f"ya existe {destino}; no se sobrescribe el original.")
 
-            ruta = servidor.workbooks.download(encontrados[0].id, filepath=str(destino), include_extract=True)
+            libro = encontrados[0]
+            ruta = servidor.workbooks.download(libro.id, filepath=str(destino), include_extract=True)
             print(f"Descargado: {ruta}")
+
+            servidor.workbooks.populate_connections(libro)
+            publicadas = {c.datasource_id: c.datasource_name for c in libro.connections
+                          if c.connection_type == "sqlproxy" and c.datasource_id}
+            if publicadas and not args.con_fuentes:
+                print("Aviso: el libro usa fuentes publicadas; sus datos no vienen en el .twbx. "
+                      "Vuelve a correr con --con-fuentes para descargarlas.")
+            if args.con_fuentes:
+                cdat = pathlib.Path(args.carpeta_datos); cdat.mkdir(parents=True, exist_ok=True)
+                for fid, fnombre in publicadas.items():
+                    seguro_f = re.sub(r"[^\w\-]+", "_", fnombre or fid).strip("_")
+                    dest_f = cdat / f"{seguro_f}_v0_original.tdsx"
+                    if dest_f.exists():
+                        print(f"Ya existe {dest_f}; no se sobrescribe."); continue
+                    rf = servidor.datasources.download(fid, filepath=str(dest_f), include_extract=True)
+                    print(f"Fuente publicada descargada: {rf}")
+                if not publicadas:
+                    print("El libro no usa fuentes publicadas: los datos ya vienen en el .twbx (si tiene extracción).")
     except TSC.ServerResponseError as e:
         error(f"Tableau respondió con un error: {e.code} {e.summary}. Revisa que el token tenga permiso de descarga. "
               "Si no se puede, pide al usuario el archivo en la carpeta.", 1)
