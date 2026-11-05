@@ -456,6 +456,11 @@ d = re.sub(r"Elige el KPI: cumplimiento de llamadas, casos o vueltas, llamadas, 
 d = re.sub(r"Metas por asesor y por día \(del reporte diario\): 4,000 llamadas[^<]*", "Métricas por asesor y por día del periodo elegido. Haz clic en un asesor y el resto de la vista se filtra.", d)
 x = x[:i] + d + x[j:]
 
+# Control "Descripciones: Mostrar / Ocultar" sobre los tooltips nuevos
+import importlib.util as _ilu
+_sp = _ilu.spec_from_file_location("descripciones", pathlib.Path(__file__).with_name("descripciones.py")); _de = _ilu.module_from_spec(_sp); _sp.loader.exec_module(_de)
+x = _de.agregar(x, colocar="plantilla")
+
 # ================= 5. Empaquetar =================
 nombre = "plantilla_atc_binatsa"
 with zipfile.ZipFile(out / f"{nombre}.twbx", "w", zipfile.ZIP_DEFLATED) as zz:
