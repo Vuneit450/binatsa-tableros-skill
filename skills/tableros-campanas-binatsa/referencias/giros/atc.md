@@ -4,7 +4,7 @@ Métricas, reglas de cálculo y vistas propias de las campañas de ATC. El dise�
 
 ## Categorías del giro
 - **Control de arriba:** Campaña (lista con "Todas" por defecto), solo si el libro tiene más de una campaña o subcampaña.
-- **Resaltar al pasar el mouse:** una sola acción por vista con todos los campos en común; para que se iluminen juntos, usar el mismo nombre de campo en todas las hojas (por ejemplo Asesor, Canal).
+- **Resaltar al pasar el mouse:** una sola acción por vista, por su campo de categoría principal: Canal (o Campaña) en Dirección, Asesor en Operación y Asesores, Franja en las vistas por hora. Usar el mismo nombre de campo en todas las hojas.
 - **Franja:** bloque de 30 minutos, en la zona horaria acordada con el cliente.
 
 ## Tarjetas
