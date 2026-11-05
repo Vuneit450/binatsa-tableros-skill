@@ -1,4 +1,4 @@
-# Plantilla BINATSA · ATC (versión 0.1.2; probada en Tableau)
+# Plantilla BINATSA · ATC (versión 0.1.3; probada en Tableau)
 
 Hecha a partir de la plantilla de Cobranza (mismo diseño, acciones y nombres internos de cálculos) con `herramientas/crear_plantilla_atc.py`. Datos inventados de llamadas entrantes.
 

@@ -1,4 +1,4 @@
-# Plantilla BINATSA · Cobranza (versión 0.4.2)
+# Plantilla BINATSA · Cobranza (versión 0.4.4)
 
 Hecha a partir del tablero de referencia de Cobranza más reciente. Todo lo del cliente se reemplazó por datos y nombres inventados.
 
