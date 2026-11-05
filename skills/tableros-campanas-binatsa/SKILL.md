@@ -38,6 +38,27 @@ Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas 
 **Cambios después de la entrega:** leer `brief.md`, hacer el cambio en una copia nueva y seguir desde el paso 6 ("Mantenimiento" en `referencias/publicacion.md`).
 **Sesión sin usuario presente:** avanzar hasta el paso 6 marcando lo supuesto "por confirmar"; nunca publicar en producción ni compartir con el cliente.
 
+## Preguntas
+Con la herramienta de opción múltiple si existe (en Claude Code, AskUserQuestion); si no, en texto con opciones numeradas. Máximo 4 por tanda, cada una con una respuesta propuesta y marcada como recomendada. No preguntar lo que ya está en `brief.md` o en el chat. Cada respuesta se registra en `brief.md`.
+
+**Tanda 1 · al terminar la revisión (paso 3), antes de construir:**
+1. Cliente y campaña: nombres para el título "<Campaña> · <Vista>" y el subtítulo (propuestos a partir del libro).
+2. Tipo de campaña: Cobranza, ATC, Ventas o Retenciones (propuesto según los campos del libro).
+3. Paleta: la sacada del logo (mostrarla con su contraste), "Te paso los hex" o "Ajustar". Si no hay logo: "Solo texto con sus colores".
+4. Vistas: Dirección, Operación y Guía y glosario (obligatorias) + Asesores (recomendada) + las vistas propias del giro que apliquen + "Otra (describirla)".
+
+**Tanda 2 · reglas (paso 4):**
+5. Categorías del giro: nombres y rangos (por ejemplo segmentos de mora, nunca asumir A/B/C) y si separa por canal o campaña.
+6. Las reglas por acordar del giro que no se pudieron leer del libro (`referencias/giros/<giro>.md`).
+7. Metas: en Cobranza, siempre del cliente ("No hay metas" o "Sí, las paso"); en ATC, las estándar salvo que pida otras.
+8. Caso de control: qué día y de qué reporte salen las cifras para cuadrar.
+
+**Tanda 3 · antes de la primera publicación (paso 6):**
+9. Sitio, proyecto de pruebas y libro de producción (si no salen del link).
+10. Horario, frecuencia y zona horaria de la actualización.
+11. Canal de alertas de fallo: "Slack (¿cuál canal?)", "Correo", "Otro" o "Sin alertas". Nunca asumir uno.
+12. Quién tiene acceso y qué vistas ve el cliente (por defecto todas; confirmar si alguna es solo interna).
+
 <!-- Secciones siguientes: por reescribir (flujo, preguntas, seguridad) -->
 ## Recursos de BINATSA
 - Repositorio de GitHub (público): Vuneit450/binatsa-tableros-skill. Solo lleva lo que sirve para cualquier campaña.
@@ -46,26 +67,6 @@ Giros: `cobranza.md` y `atc.md` (completos); `retenciones.md` (parcial); Ventas 
   - plantillas/: brief.md, diccionario-datos.md y paleta-cliente.md, vacías. Se copian a la carpeta privada del proyecto.
   - Si el repositorio no está conectado a la sesión, leerlo desde el navegador o pedir el archivo.
 - Todo lo del cliente (logo, paleta, brief, reglas, libros, datos, capturas y video) vive en la carpeta privada del proyecto, `BINATSA-Tableros/<cliente>/<campaña>/`, y nunca se sube al repositorio.
-
-## Preguntas obligatorias al iniciar un proyecto nuevo
-Hacerlas con la herramienta de preguntas de opción múltiple si existe (en Claude Code, AskUserQuestion); si no, en texto con opciones numeradas. Cada tanda tiene máximo 4 preguntas, ofreciendo opciones concretas y una recomendada. No empezar a construir hasta tener las bloqueantes (1 a 4). Si el usuario ya las respondió en el chat, no repetirlas. Si la sesión es desatendida, elegir lo razonable, declararlo arriba y marcarlo "por confirmar".
-
-Tanda 1 (bloqueantes, antes de construir):
-1. Cliente y logo: nombre del cliente (va en el título "Cobranza <Cliente> · <Vista>") y logo. Su ícono va arriba a la izquierda del dashboard, junto al logo de BINATSA, y se usa también para sacar su paleta. Opciones del logo: "Lo subo ahora", "Ya está en la carpeta del cliente (marca/)", "No hay logo: usar solo texto con sus colores". Siempre confirmarlo, aunque ya exista en la carpeta.
-2. Colores de marca del cliente: "Los paso (hex)", "Sácalos del logo", "Usa la paleta BINATSA por ahora". La paleta de encabezados, acentos y KPIs sale de aquí.
-3. Fuente de datos: "Tabla/consulta existente", "Archivo (CSV/Excel)", "Aún no hay: usar datos de ejemplo". Confirmar campos disponibles: canales (llamadas, SMS, Mail, Blaster, WhatsApp, Visitas, Predictivo, Inbound), tipificaciones, asesor, zona, monto, promesas, pagos.
-4. Vistas: Dirección y Operación son obligatorias y la Guía de uso es recomendada. Opciones: "Dirección, Operación y Guía de uso" (recomendada), "Agregar Seguimiento por asesor", "Otra vista (describirla)".
-
-Tanda 2 (durante la construcción, no bloquea el arranque):
-5. Segmentación de cartera del cliente (rangos de mora, nombres y días; no asumir A/B/C) y si el proyecto separa además por canal o producto.
-6. Tarjetas KPI de Dirección y de Operación: "Las propuestas del skill" (recomendada, ajustadas al proyecto), "Las que defina el cliente", "Propongo yo según los campos disponibles".
-7. Metas: las metas no son estándar. Preguntar siempre si el cliente tiene metas (por asesor, por día o por segmento) y cuáles: "No hay metas" o "Sí, las paso".
-
-Tanda 3 (antes de publicar y de compartir con el cliente):
-8. Workbook, proyecto y sitio de Tableau Cloud (publicar siempre sobre el workbook existente cuando ya hay uno).
-9. Horario, frecuencia y zona horaria de actualización del extracto.
-10. Canal de alertas de fallo de actualización: "Slack (¿cuál canal?)", "Correo", "Otro", "Sin alertas". Nunca asumir uno.
-11. Quiénes tienen acceso. Por defecto el cliente ve las dos vistas (Dirección y Operación), con el desglose por asesor.
 
 ## Reglas generales (Tableau Cloud)
 1. NUNCA mover ni modificar consultas/fuentes. Solo ocultar campos huérfanos que ningún reporte use ni vaya a usar.
