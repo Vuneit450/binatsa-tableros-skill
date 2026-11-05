@@ -50,6 +50,16 @@ Vista de solo texto, sin gráficos, pero con estilo: secciones con franja, colum
 
 Las definiciones salen de `referencias/giros/<giro>.md` y de las reglas acordadas en `brief.md`, sin términos técnicos. Aplica la lista de palabras prohibidas ("Texto visible").
 
+### Operación: hojas obligatorias
+Es la vista de consulta del día a día: todas sus hojas están ligadas, así que un solo clic (un asesor, un día, una hora o una tipificación) filtra todo junto. Lleva, como mínimo, estas cinco hojas; las métricas concretas las define `referencias/giros/<giro>.md`:
+1. **🕒 ¿En qué horas contestan los titulares?** Mapa de calor hora del día (filas) contra día (columnas), con selector "Métrica" en la franja del título (por ejemplo Gestiones, Contactos con titular, Promesas, Cuentas distintas, % contacto, % promesa). Con fila de total general.
+2. **🏆 ¿Quién produce y quién necesita apoyo?** Tabla por asesor, ordenada de mayor a menor, con sus KPIs (por ejemplo gestiones, cuentas, intentos por cuenta, % contacto, % promesa, monto prometido, hora de primera y última gestión) y total general. Clic en un asesor filtra toda la vista.
+3. **📞 ¿Qué está pasando en las llamadas?** Barras horizontales por resultado o tipificación, de mayor a menor, apiladas por la categoría del giro (por ejemplo bucket o canal), con la leyenda de colores en el subtítulo.
+4. **👥 ¿Quién marca más?** Barras horizontales por asesor con sus llamadas, de mayor a menor, con el número en la barra.
+5. **📈 ¿Cuánto se marca cada día?** Mapa de calor como el de Dirección: categoría del giro (filas) contra día (columnas), con selector de métrica (por ejemplo llamadas, contestadas, conversaciones, % contestación). Así se ve el volumen diario y en qué categoría se concentra.
+
+Puede llevar más hojas según el giro (por ejemplo cuentas sin gestión, embudo, visitas o esfuerzo contra resultado).
+
 ### Asesores (recomendada)
 Tabla por asesor con sus indicadores, mapa de calor con selectores de KPI y de periodo, y barras. Clic en un asesor filtra todo; otro clic regresa a todos. Las metas no son estándar: solo si el cliente las tiene, se agregan y se marca con ✓ en verde del semáforo lo que las cumple.
 
