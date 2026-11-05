@@ -96,7 +96,7 @@ Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabez
 - **Las tarjetas KPI reciben, nunca son origen.**
 - **Pasar el mouse resalta los "datos hermanos".** Una acción de resaltar al pasar el mouse, a nivel de la vista, ilumina en todas las hojas lo que comparte el valor señalado y apaga lo demás. Campos: los de categoría del giro (por ejemplo Bucket o Segmento, Canal y Asesor en Cobranza; Campaña, Tipificación, Franja y Asesor en ATC; la lista va en `referencias/giros/<giro>.md`). Las tarjetas KPI quedan fuera del destino, para que no se apaguen. Para que dos hojas se iluminen juntas deben usar el campo con el mismo nombre.
 - **Clic en la categoría principal** (por ejemplo un bucket o segmento) además cambia ese parámetro de arriba con una acción de parámetro, para que todo lo que depende de él se ajuste.
-- **Clic en un día (acción de parámetro).** Los gráficos con la fecha en el eje no usan acción de filtro, porque dejaría a las tarjetas sin periodo previo y los deltas saldrían mal. Un clic en un día llena el parámetro "Día seleccionado"; al limpiar la selección, el parámetro vuelve a vacío. Todos los cálculos de periodo (ver `referencias/giros/<giro>.md`) usan [Desde efectivo] y [Hasta efectivo], que toman ese día si hay uno elegido. Así las tarjetas muestran el día elegido contra el día anterior y contra 7 días antes.
+- **Clic en un día (acción de parámetro).** Los gráficos con la fecha en el eje no usan acción de filtro, porque dejaría a las tarjetas sin periodo previo y los deltas saldrían mal. Un clic en un día llena el parámetro "Día seleccionado"; al limpiar la selección, el parámetro vuelve a vacío. Todos los cálculos de periodo (ver "Cálculos de periodo") usan [Desde efectivo] y [Hasta efectivo], que toman ese día si hay uno elegido. Así las tarjetas muestran el día elegido contra el día anterior y contra 7 días antes.
 - **Respaldo:** si en la plantilla la acción de parámetro no se limpia bien o los demás gráficos no responden al día, usar una acción de filtro normal en esos gráficos de fecha y quitar de su destino las tarjetas KPI. Avisar al usuario cuál quedó.
 - Quedan fuera solo las hojas que no comparten campos (por ejemplo, una encuesta de otra fuente). Se declaran en el reporte de la prueba de interacción con su motivo; deben ser la minoría.
 - Verificación obligatoria: "Prueba de interacción" en `referencias/publicacion.md`.
@@ -111,6 +111,13 @@ Los controles de arriba son parámetros, no filtros: Tableau no permite leer el 
 - **Selectores de métrica** (por ejemplo "KPI" o "Métrica del mapa de calor"): listas con las métricas que muestra la gráfica.
 
 **Nombres:** en español, sin pistas entre paréntesis (nada de "Desde (2000 = sin límite)" ni "Campaña (Parámetro)"). Solo se permite la unidad cuando hace falta, por ejemplo "Tolerancia (min)". La explicación de cada control va en la Guía y glosario. Los cálculos derivados se nombran igual en todos los proyectos: [Desde efectivo], [Hasta efectivo] y las banderas de periodo.
+
+### Cálculos de periodo (iguales en todos los giros)
+- **Rango efectivo:** el que define Periodo; con "Personalizado", el de Desde y Hasta. Si hay un día seleccionado, es ese día. En Tableau: [Desde efectivo] y [Hasta efectivo]. Las selecciones que no son de fecha (canal, asesor, segmento, hora, tipificación) no cambian el rango: se aplican igual al periodo actual y al previo.
+- **Banderas por fila:** "En rango actual" = fecha entre [Desde efectivo] y [Hasta efectivo]; "En rango anterior" = el rango de la misma duración inmediatamente anterior; "En rango hace 7 días" = fecha entre [Desde efectivo] − 7 y [Hasta efectivo] − 7.
+- **Cada KPI se calcula una vez por periodo** con IF bandera THEN medida END (actual, anterior y hace 7 días), y el delta compara esos cálculos.
+- **Ocultar "vs 7 días previos"** con un cálculo que devuelva vacío cuando DATEDIFF('day', [Desde efectivo], [Hasta efectivo]) + 1 <= 7.
+- **Sin periodo previo con datos** (por ejemplo "Todo el historial" o el primer periodo con datos): el delta muestra "-".
 
 ## Tarjetas KPI
 Van arriba en Dirección y Operación: 6 por fila, hasta 2 filas (medidas en "Medidas estándar"). Las tarjetas reciben las acciones, nunca son origen. Qué métricas lleva cada una lo define `referencias/giros/<giro>.md`; cada tarjeta debe ayudar a decidir, no solo describir.
@@ -132,7 +139,7 @@ Reglas de los deltas:
 - Con un rango efectivo de 7 días o menos (incluido un día seleccionado), se oculta "vs 7 días previos" y queda solo "vs periodo previo".
 - Sin periodo con el cual comparar (por ejemplo "Todo el historial"), el delta muestra "-", nunca "+0.0 %".
 - Para métricas que ya son porcentaje, el delta va en puntos porcentuales (pp); para las demás, en %.
-- Cálculo en Tableau: banderas de periodo y [Desde efectivo]/[Hasta efectivo], ver `referencias/giros/<giro>.md`.
+- Cálculo en Tableau: ver "Cálculos de periodo".
 
 ## Estilo visual
 - Títulos de hojas y tarjetas: ver "Títulos de cada hoja" y "Tarjetas KPI".

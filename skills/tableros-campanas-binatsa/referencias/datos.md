@@ -13,34 +13,14 @@ Para que la sesión conozca los datos antes de construir, en la carpeta del clie
 4. Con eso se calcula por código el caso de control (ver "Validación de cifras") y se compara con lo que muestra el dashboard publicado.
 Los datos reales se quedan en la carpeta local y nunca se suben al repositorio.
 
-## Tablas mínimas
-| # | Tabla | Nivel de detalle | Campos mínimos |
-|---|---|---|---|
-| 1 | Cartera / asignación | Una foto por cuenta por día | Fecha de corte, contrato, identificador de la solicitud, estatus de la cuenta, días de mora, fecha de asignación, saldos (vencido y actual), cola o campaña, tipo de producto, segmento |
-| 2 | Gestiones | Un registro por intento o acción | Contrato, fecha y hora, ID de agente, tipo de marcación o canal (Preview, Predictivo, Inbound, WhatsApp…), medio, resultado de la gestión (tipificación), con quién hubo contacto, monto y fecha de promesa, estatus, segmento |
-| 3 | Promesas | Una por promesa | Cuenta, fecha de captura, fecha compromiso, monto, empleado, campaña o canal |
-| 4 | Pagos | Uno por pago | Folio, contrato, estatus, días de mora, canal, proveedor, monto, fecha de pago, fecha de posteo, tipo de pago, cola, segmento |
-| 5 | Inbound / telefonía | Una por llamada entrante | Contrato o teléfono, fecha y hora, atendida o abandonada, tiempo de espera, agente, resultado |
-| 6 | Envíos masivos | Uno por envío | Contrato, fecha y hora, canal (SMS, Email, Blaster, WhatsApp, Carteo), estatus de entrega; para WhatsApp, también los chats recibidos (contrato, fecha y hora de la respuesta y agente que atendió) |
-| 7 | Visitas | Una por visita o evento | Contrato, fecha, resultado y, si aplica, promesa y evento de recuperación de bien |
-| 8 | Headcount y calidad | Por día y por monitoreo | Personal disponible y capacidad por día; por monitoreo: agente, tipo, calificación y quejas |
-| 9 | Catálogos | Tablas de referencia | Asesores (login o ID → nombre completo), Rangos de segmento, qué resultado cuenta como conectado, contacto con titular (RPC) o promesa, canales de inbound, calendario de días hábiles y festivos y, si el proyecto las tiene, metas |
-No todas aplican a todos los proyectos: confirmar con el usuario cuáles cubre el cliente, pero pedir las que existan desde la primera carga.
+## Datos mínimos y reglas de negocio
+Cada giro define sus tablas mínimas y sus reglas por acordar en `referencias/giros/<giro>.md`. Se confirman con el usuario cuáles cubre el cliente, se piden las que existan desde la primera carga y cada regla acordada se registra en `brief.md`, en el glosario y en el tooltip "Cómo se calcula".
 
-## Indicadores que salen de esos datos
-Por día y por segmento de cartera, según canal: cuentas asignadas, trabajadas y conectadas; intentos; contactos con titular (RPC); promesas tomadas y cumplidas; llamadas recibidas, abandonadas y contestadas dentro del tiempo objetivo; envíos y respuestas por canal (SMS, Email, Blaster, WhatsApp, cartas, recados); visitas; pagos y monto recuperado; personal y calidad. Definiciones: `referencias/giros/cobranza.md`.
-
-## Reglas de negocio por acordar (por escrito, antes de construir)
-1. Rangos de cada segmento: límites oficiales y si hay segmentos adicionales. Si distintas fuentes los escriben distinto, elegir uno.
-2. Filtros de cartera: qué cuentas se excluyen (por estatus, por producto o por segmento) y confirmar que siguen vigentes.
-3. Cuenta trabajada única: contrato más día, y qué canales cuentan.
-4. Conectado y contacto con titular: qué resultado (tipificación) cuenta como cada uno; vive en el catálogo.
-5. Contacto con titular total: si es la suma de salientes y entrantes.
-6. Promesa cumplida: ventana de días en que se busca el pago desde la fecha de la promesa, y si cuenta el pago parcial.
-7. Atribución de llamadas entrantes a un envío previo (SMS, email, etc.): regla y días de ventana.
-8. Días laborables: qué días cuentan como hábiles y cómo se tratan los festivos.
-9. Monto recuperado: por fecha de pago o por fecha de posteo.
-Cada regla acordada se documenta en el glosario (`referencias/giros/cobranza.md`) y en el tooltip "Cómo se calcula".
+Reglas generales, para todos los giros:
+1. Catálogo de asesores (login o ID → nombre completo): siempre.
+2. Días laborables: qué días cuentan como hábiles y cómo se tratan los festivos.
+3. Zona horaria de fechas y horas.
+4. Qué cuenta como registro único (llamada, cuenta o caso) y en qué fecha se cuenta cada evento.
 
 ## Carga y formato
 - Carga diaria, completa y sin intervención manual, con una hora de corte acordada antes del envío al cliente.
