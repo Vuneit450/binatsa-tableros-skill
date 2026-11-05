@@ -33,13 +33,22 @@ Todas llevan el mismo encabezado y botones hacia todas las demás. Los nombres d
 | Corte general | Corte general → | ¿Cómo van todas las campañas juntas? | Solo en libros con varias campañas |
 
 ### Guía y glosario
-Vista de solo texto, sin gráficos. En este orden:
-1. Para qué sirve cada vista: una línea por vista, con su pregunta.
-2. Cómo usar el tablero: las 5 reglas (los filtros de arriba afectan todo; clic en una gráfica filtra el resto; otro clic quita el filtro; pasa el mouse y te explica; los selectores cambian la gráfica).
-3. Glosario agrupado por tema, cada grupo con su emoji (por ejemplo "📞 Llamadas", "✅ Indicadores de servicio"). Cada métrica lleva su definición en palabras simples y, si tiene semáforo, sus umbrales (por ejemplo "verde ≥ 95 %"). Las definiciones salen de `giros/<giro>.md` y de las reglas acordadas en `brief.md`.
-4. Segmentos o categorías del giro, con nombre y rango.
-5. Actualización: cada cuándo se actualizan los datos y el día del último dato.
-6. A quién avisar si algo no cuadra.
+Vista de solo texto, sin gráficos, pero con estilo: secciones con franja, columnas de colores, emojis y jerarquía tipográfica. Nunca una lista plana de definiciones. Mismo encabezado y botones que las demás vistas. De arriba hacia abajo:
+
+1. **📘 Para qué sirve cada vista.** Franja oscura con el título y un subtítulo corto ("cada botón de arriba lleva a una vista"). Debajo, una columna por vista, todas del mismo ancho:
+   - Cabecera de la columna en el color del botón de esa vista, con su emoji y nombre en blanco.
+   - La pregunta que responde, en negrita (por ejemplo "¿Cómo va la campaña?").
+   - Una o dos líneas, en gris, de lo que contiene.
+2. **Dos bloques lado a lado:**
+   - **🧭 Cómo usar el tablero:** las 5 reglas numeradas, cada número dentro de un cuadrito del color oscuro de la marca: 1) los filtros de arriba afectan todo; 2) un clic en una barra o celda filtra el resto; 3) otro clic quita el filtro; 4) pasa el mouse y te explica qué mide y cómo se calcula; 5) los selectores cambian lo que muestra la gráfica.
+   - **Categorías del giro** (por ejemplo "⏳ Buckets" o segmentos): un recuadro por categoría con su nombre en blanco sobre su color (el mismo de las gráficas), y debajo su rango en ese color (por ejemplo "31 a 60 días"). Un recuadro gris "General" para todos juntos.
+3. **📖 Glosario.** Franja oscura con el título y el subtítulo "qué significa cada dato y cómo se calcula". Debajo, tres columnas por tema (por ejemplo "Cartera y cobertura", "Contacto y promesas", "Pagos y productividad"; los temas los define el giro), cada una con su cabecera de color y emoji. Cada término:
+   - Línea 1: emoji + **término en el color del tema** + ": " + definición simple en texto oscuro (11 pt).
+   - Línea 2: cómo se calcula, en gris y más chico (9 pt), con sangría (por ejemplo "Cuentas gestionadas ÷ cuentas asignadas").
+   - Si tiene semáforo, sus umbrales al final de la línea 2 (por ejemplo "verde ≥ 95 %").
+4. **📒 Notas para leer los datos.** Franja oscura y viñetas cortas: qué significa cada canal, reglas de conteo acordadas, de dónde salen los datos (con el nombre del reporte, nunca de la base), cada cuándo se actualizan, el día del último dato y a quién avisar si algo no cuadra.
+
+Las definiciones salen de `referencias/giros/<giro>.md` y de las reglas acordadas en `brief.md`, sin términos técnicos. Aplica la lista de palabras prohibidas ("Texto visible").
 
 ### Asesores (recomendada)
 Tabla por asesor con sus indicadores, mapa de calor con selectores de KPI y de periodo, y barras. Clic en un asesor filtra todo; otro clic regresa a todos. Las metas no son estándar: solo si el cliente las tiene, se agregan y se marca con ✓ en verde del semáforo lo que las cumple.
