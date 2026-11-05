@@ -8,7 +8,7 @@
 - [ ] Ningún texto visible menciona servidores, tablas, Excel ni sistemas internos.
 - [ ] Tarjetas KPI con los dos deltas y color de ▲▼ correcto (con rango de 7 días o menos, solo "vs periodo previo"; probar con un rango corto y uno largo).
 - [ ] Título principal de 20 pt en negrita, blanco sobre franja, con el formato "Cobranza <Cliente> · <Vista>" y su subtítulo; títulos de bloque de 13 pt con subtítulo de 10 pt; medidas de la sección "Medidas estándar" respetadas.
-- [ ] Botones de navegación funcionan y cumplen el formato (164 x 36 px, "Ir a <Vista> →", color por destino con texto blanco a 4.5:1, "📖 Glosario" en gris); ícono del cliente a la izquierda y logo de BINATSA a la derecha, en la misma posición en todas las vistas.
+- [ ] Botones de navegación funcionan y cumplen el formato (164 x 36 px, "<Vista> →", color por destino con texto blanco a 4.5:1, "📖 Guía y glosario" en gris y, cuando el video esté publicado, "▶ Manual en video"); ícono del cliente a la izquierda y logo de BINATSA a la derecha, en la misma posición en todas las vistas.
 - [ ] Información sin bordes ni fondos (todo transparente; solo los títulos y los botones de navegación pueden llevarlos); mosaico.
 - [ ] Todo centrado, menos los títulos (de gráficos, de tablas y encabezados de zona), a la izquierda.
 - [ ] Ningún gráfico con líneas de fondo ni con el título del segundo eje; los valores se leen por etiquetas, sin etiqueta en los valores 0 o nulos de los gráficos y con "-" en las celdas 0 o nulas de las tablas.

@@ -1,35 +1,35 @@
 # Diseño · Tableros de campañas BINATSA
 
-Estilo tomado de los tableros reales de referencia de BINATSA (uno de ATC y uno de Cobranza).
+Estilo tomado del tablero de referencia más reciente de BINATSA (Cobranza), con ajustes acordados.
 
 ## Encabezado (igual en todas las vistas)
-Fila de unos 72 px de alto, a todo el ancho. De izquierda a derecha:
-1. **Logo del cliente** (unos 100 x 72 px) sobre fondo blanco: el PNG con proporción fija, nunca estirado.
-2. **Franja de título** (cerca de la mitad del ancho), en el color oscuro de la marca del cliente. Es la única parte del encabezado con fondo oscuro.
-   - Título: "<emoji> <Campaña> · <Vista>", 20 pt, Tableau Bold, blanco.
-   - Subtítulo de 10 pt: "<Cliente> · <pregunta que responde la vista>".
-3. **Controles** (Periodo, Desde, Hasta y el control del giro) sobre un panel claro (`#e3e9f2`). Cada control va en blanco con una barra delgada del color oscuro de la marca a su izquierda.
-4. **Logo de BINATSA** (unos 100 x 72 px) sobre fondo blanco, pegado a la derecha.
+Una sola franja de 80 px de alto, a todo el ancho, en el color oscuro de la marca del cliente, con esquina recta. De izquierda a derecha:
+1. **Logo del cliente** (unos 88 x 80 px): el PNG con proporción fija, nunca estirado.
+2. **Título** (unos 1050 px de ancho): "<Campaña> · <Vista>", 20 pt, Tableau Bold, blanco. Debajo, subtítulo de 10 pt en gris claro (`#d0d0d0`): "<Cliente> · <pregunta que responde la vista>". Es el texto más grande del tablero.
+3. **Controles** (Periodo, Desde, Hasta y el control del giro), de 196 a 236 px de ancho cada uno, sin fondo ni borde propios: se ve la franja detrás. Entre control y control, una separación delgada del mismo color de la franja.
+4. **Logo de BINATSA** (unos 272 x 80 px), pegado a la derecha, sobre una tarjeta blanca porque sus letras azul marino no se leen sobre la franja.
+Cómo lograrlo en Tableau: un contenedor horizontal con el fondo de la franja y cada objeto de adentro sin fondo ni borde (ver `herramientas/aplicar-reglas-en-tableau.md`).
 
 ## Botones de navegación
-Fila completa debajo del encabezado, sobre fondo claro (`#f3f5f9`), pegada a la izquierda. Un botón por vista de destino:
-- Botón de texto, unos 165 x 56 px, todos del mismo ancho y sin espacio entre ellos.
-- Texto: "<emoji> <Vista>" (por ejemplo "📊 Dirección", "⚙️ Operación", "👥 Asesores"), Tableau Bold 11 pt, blanco.
-- Color: las vistas principales en el color oscuro de la marca; "📖 Guía y glosario" y las vistas de apoyo en gris `#455a64`. Todo botón debe llegar a 4.5:1 con el texto blanco.
-- Libro con varias campañas: los botones que llevan a otra campaña van en el color de esa campaña, para diferenciarlas (por ejemplo "🔴 <Otra campaña>" en el color de esa campaña).
-- A la derecha de los botones, una línea "ℹ️" de 8 pt en gris `#44546a` con la instrucción corta de la vista (por ejemplo "Filtra campaña, fechas y KPI arriba").
+Fila pegada a la izquierda, debajo del encabezado. Un botón por cada vista de destino:
+- Botón de texto de 164 x 36 px, todos iguales y sin espacio entre ellos.
+- Texto: "<Vista> →" (por ejemplo "Dirección →", "Operación →", "Asesores →"), Tableau Bold 11 pt, blanco.
+- Color por destino: Dirección en el primario del cliente, Operación en su secundario, las demás vistas en el color oscuro de la marca. Cada uno debe llegar a 4.5:1 con el texto blanco; si no llega, usar su tono oscuro.
+- "📖 Guía y glosario" en gris `#55657A` (5.9:1 con blanco), en todas las vistas menos en la propia Guía.
+- Libro con varias campañas: los botones que llevan a otra campaña van en el color de esa campaña, para diferenciarlas.
+- Al final de la fila, el enlace "▶ Manual en video" (12 pt, negrita, en el color de acento del cliente) al video guía de ese tablero. Cada tablero tiene su propio video; el enlace se agrega cuando el video está publicado (ver `referencias/video-guia.md`).
 
 ## Vistas
 Todas llevan el mismo encabezado y botones hacia todas las demás. Los nombres de las vistas comunes son fijos en todos los giros, para que todo tablero BINATSA se reconozca.
 
 | Vista | Botón | Pregunta que responde | Regla |
 |---|---|---|---|
-| Dirección | 📊 Dirección | ¿Cómo va la campaña? | Obligatoria |
-| Operación | ⚙️ Operación | ¿Qué hay que corregir hoy? | Obligatoria |
+| Dirección | Dirección → | ¿Cómo va la campaña? | Obligatoria |
+| Operación | Operación → | ¿Qué hay que corregir hoy? | Obligatoria |
 | Guía y glosario | 📖 Guía y glosario | ¿Cómo se usa y qué significa cada dato? | Obligatoria |
-| Asesores | 👥 Asesores | ¿Cómo rinde cada asesor? | Recomendada |
+| Asesores | Asesores → | ¿Cómo rinde cada asesor? | Recomendada |
 | Vistas del giro | las define `giros/<giro>.md` | — | Según el giro |
-| Corte general | 📑 Corte general | ¿Cómo van todas las campañas juntas? | Solo en libros con varias campañas |
+| Corte general | Corte general → | ¿Cómo van todas las campañas juntas? | Solo en libros con varias campañas |
 
 ### Guía y glosario
 Vista de solo texto, sin gráficos. En este orden:
@@ -52,20 +52,21 @@ Tabla por asesor con sus indicadores, mapa de calor con selectores de KPI y de p
 - Todo va centrado (gráficos, tablas, números y deltas de tarjetas, texto "Cómo leer"), excepto los títulos, que van a la izquierda, y los botones, pegados a la izquierda.
 
 ## Títulos de cada hoja
-El título va dentro de la propia hoja (no en un objeto de texto aparte), sobre una franja del color oscuro de la marca:
-- Línea 1: "<emoji> <pregunta que responde>" (por ejemplo "✅ ¿Contestamos a tiempo?"), 12 pt, negrita, blanco.
-- Línea 2: cómo se lee o se calcula, en una línea (por ejemplo "Atendidas en ≤20 s ÷ atendidas."), 8 pt, en un tono claro (`#cfd8dc`).
-- En tarjetas KPI, solo la línea 1 con el nombre de la métrica, 10 pt.
+El título va sobre una franja del color oscuro de la marca, alineado a la izquierda:
+- Línea 1: "<emoji> <pregunta que responde>" (por ejemplo "🔥 ¿Qué canal recupera más cada día?"), 13 pt, Tableau Semibold, blanco.
+- Línea 2: cómo se lee o se calcula, en una línea, 10 pt, Tableau Light, en un tono claro (`#d6e6f2`).
+- En tarjetas KPI, la línea 1 lleva el nombre de la métrica.
 
 ## Medidas estándar (en 2300 x 1300 px)
 | Elemento | Medida |
 |---|---|
-| Encabezado | 72 px de alto (detalle en Encabezado) |
-| Fila de botones | 56 px de alto; botones de unos 165 px de ancho |
-| Tarjetas KPI | 6 por fila, de igual ancho (unos 380 px). Fila principal de unos 160 px de alto; segunda fila opcional de tarjetas de apoyo de unos 85 px. Máximo 2 filas |
-| Gráficos y tablas | margen de 4 px; los principales entre 350 y 500 px de alto, los de apoyo entre 150 y 250 px |
+| Margen exterior del tablero | 8 px |
+| Encabezado | 80 px de alto (detalle en Encabezado) |
+| Botones de navegación | 164 x 36 px |
+| Tarjetas KPI | 6 por fila, de igual ancho (unos 380 x 190 px), margen de 6 px y relleno de 6 px. Máximo 2 filas |
+| Gráficos y tablas | margen de 6 px y relleno de 6 px; los principales entre 350 y 400 px de alto, los de apoyo entre 150 y 230 px |
 | Selector de ancho completo (por ejemplo de KPI) | 40 px de alto |
-| Pie "Cómo leer" | ancho completo, una o dos líneas de 9 pt |
+| Pie "Cómo leer" | ancho completo, 52 px de alto, 9 pt |
 
 Las imágenes de `ejemplos/` son del estilo anterior (1910 x 1300 y otro encabezado): sirven solo como idea general hasta que se actualicen.
 
