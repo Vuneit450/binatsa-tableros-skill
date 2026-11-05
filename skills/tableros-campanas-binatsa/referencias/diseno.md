@@ -18,6 +18,7 @@ Fila pegada a la izquierda, debajo del encabezado. Un botón por cada vista de d
 - "📖 Guía y glosario" en gris `#55657A` (5.9:1 con blanco), en todas las vistas menos en la propia Guía.
 - Libro con varias campañas: los botones que llevan a otra campaña van en el color de esa campaña, para diferenciarlas.
 - Al final de la fila, el enlace "▶ Manual en video" (12 pt, negrita, en el color de acento del cliente) al video guía de ese tablero. Cada tablero tiene su propio video; el enlace se agrega cuando el video está publicado (ver `referencias/video-guia.md`).
+- En el resto de la fila, una línea "ℹ️" de 8 pt en gris `#44546a` con la instrucción corta de la vista y las definiciones clave (por ejemplo "ℹ️ Filtra periodo y canal arriba · Nivel de servicio = atendidas ≤20 s ÷ atendidas").
 
 ## Vistas
 Todas llevan el mismo encabezado y botones hacia todas las demás. Los nombres de las vistas comunes son fijos en todos los giros, para que todo tablero BINATSA se reconozca.
