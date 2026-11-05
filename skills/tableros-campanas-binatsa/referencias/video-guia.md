@@ -123,7 +123,7 @@ Mínimo 4 s. Referencia visual: `marca-binatsa/cierre-video.png`.
 4. Ver el video completo en el reproductor, no solo cuadros sueltos; si es vertical, verlo en un teléfono.
 5. Renderizar un cuadro a 3840 x 2160 y reducirlo a 1600 x 900. Comprobar tres cosas: que ningún texto se encima con la franja, que el círculo de resalte queda dentro del marco y que los cuadros a mitad de un barrido se ven fluidos. Esta prueba detecta, por ejemplo, un zoom exagerado, una franja cortada o una etiqueta de capítulo partida en dos líneas.
 6. Escuchar el audio completo.
-7. Privacidad: si el video saldrá de la empresa, revisar cifras reales, IDs de asesores y nombres de otros clientes que aparezcan en las capturas.
+7. Privacidad: el video siempre se revisa antes de entregarlo: ningún nombre de otro cliente ni nota interna en las capturas. Los asesores aparecen por nombre, como en el tablero; si el video saldrá fuera del cliente, difuminar nombres de asesores y cifras reales.
 8. Reportar al usuario en pocas líneas: duración, formato, hojas cubiertas, hojas sin cubrir y descripciones por confirmar.
 
 ## Entregables

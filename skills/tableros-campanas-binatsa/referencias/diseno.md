@@ -141,6 +141,7 @@ Reglas de los deltas:
 - Etiquetas de valor en gráficos: si el valor de una marca es 0 o nulo, no se muestra su etiqueta, para no saturar la gráfica con datos innecesarios. Aplica a barras, mapa de calor y demás gráficos; la marca o la celda, si existe, se queda sin número. (Las tarjetas KPI sin datos siguen mostrando "-", ver "Estados vacíos y datos parciales".)
 - Tablas: todo el contenido centrado (encabezados y celdas) y siempre con totales (total general en filas y, si aplica, en columnas). Una celda con valor 0 o nulo muestra "-" en lugar del número.
 - Sin ruido: nada de gráficos huérfanos, hojas visibles que el cliente no consulta (ocultas; acceso por "Ir a hoja"), ni calculados sin uso.
+- Asesores siempre por su nombre (nombre y apellido), nunca por login, usuario o ID: se ocultan porque no suman valor. Si la fuente no trae el nombre, pedir al cliente el catálogo de asesores; mientras no exista, avisar al usuario antes de publicar.
 - Nombres de hojas: sin estándar; cada proyecto usa los suyos. Los parámetros sí son estándar (ver Parámetros estándar).
 - Gráficos sin líneas y con fondo transparente: sin cuadrícula, líneas de cero, líneas de referencia sin uso, divisiones de fila y columna, ni líneas de eje. Los valores se leen con etiquetas en las marcas (en las barras, el número arriba).
 - Ningún gráfico muestra títulos de ejes, ni del primero ni del segundo, para que no le quiten espacio al gráfico. Lo que mide cada eje se explica en el subtítulo de la hoja y en el tooltip "Cómo se calcula".
@@ -214,7 +215,7 @@ Es la hoja de consulta principal de Dirección: ahí el usuario explora casi tod
 - **Título** (franja oscura, como toda hoja): "🔥 ¿Qué <categoría> rinde más cada día?" y, en la línea 2, cómo se lee: "Cada celda es un <categoría> en un día; más oscuro = valor más alto. Cambia el KPI con el selector. Clic en una celda filtra el tablero por ese <categoría> y día."
 - **Selector "KPI"** dentro de la franja del título, a la derecha: parámetro de lista con **todas las métricas del giro** que se puedan calcular por categoría y día (conteos, montos, porcentajes y promedios; la lista sale de `referencias/giros/<giro>.md`). Valor por defecto: la métrica principal de la campaña.
 - **Cálculos:** "Métrica seleccionada" (CASE sobre el parámetro) para el color y "Métrica (texto)" para la etiqueta, con % o $ según la métrica.
-- **Celdas:** el valor dentro de cada celda (mínimo 8 pt en web). Escala de claro a oscuro con la paleta del cliente; el texto de la celda cambia a blanco sobre fondo oscuro para leerse con al menos 4.5:1.
+- **Celdas:** el valor dentro de cada celda (mínimo 8 pt en web); una celda con 0 o nulo queda vacía, sin número. Escala de claro a oscuro con la paleta del cliente; el texto de la celda cambia a blanco sobre fondo oscuro para leerse con al menos 4.5:1.
 - **Interacción:** pasar el mouse resalta esa categoría en todas las hojas; clic en una celda filtra por esa categoría y llena "Día seleccionado" (ver Interactividad).
 
 Operación puede llevar otro mapa de calor (por ejemplo día contra hora) con el mismo patrón.

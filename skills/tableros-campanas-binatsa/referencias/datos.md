@@ -24,7 +24,7 @@ Los datos reales se quedan en la carpeta local y nunca se suben al repositorio.
 | 6 | Envíos masivos | Uno por envío | Contrato, fecha y hora, canal (SMS, Email, Blaster, WhatsApp, Carteo), estatus de entrega; para WhatsApp, también los chats recibidos (contrato, fecha y hora de la respuesta y agente que atendió) |
 | 7 | Visitas | Una por visita o evento | Contrato, fecha, resultado y, si aplica, promesa y evento de recuperación de bien |
 | 8 | Headcount y calidad | Por día y por monitoreo | Personal disponible y capacidad por día; por monitoreo: agente, tipo, calificación y quejas |
-| 9 | Catálogos | Tablas de referencia | Rangos de segmento, qué resultado cuenta como conectado, contacto con titular (RPC) o promesa, canales de inbound, calendario de días hábiles y festivos y, si el proyecto las tiene, metas |
+| 9 | Catálogos | Tablas de referencia | Asesores (login o ID → nombre completo), Rangos de segmento, qué resultado cuenta como conectado, contacto con titular (RPC) o promesa, canales de inbound, calendario de días hábiles y festivos y, si el proyecto las tiene, metas |
 No todas aplican a todos los proyectos: confirmar con el usuario cuáles cubre el cliente, pero pedir las que existan desde la primera carga.
 
 ## Indicadores que salen de esos datos
