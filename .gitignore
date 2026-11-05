@@ -1,0 +1,45 @@
+# Repositorio PÚBLICO: aquí solo va lo que sirve para cualquier campaña.
+# Nada de un cliente (logo, paleta, brief, reglas, libros, datos, capturas, video) ni credenciales.
+
+# Credenciales y entornos
+.env
+.env.*
+*.pem
+*.key
+
+# Registros (publicar_libro.py anota publicaciones aquí)
+*.log
+
+# Libros y datos de Tableau
+*.twbx
+*.twb
+*.hyper
+*.tde
+*.tds
+*.tdsx
+!ejemplos/libro-prueba/prueba_publicacion.twbx
+
+# Datos tabulares
+*.csv
+*.xlsx
+*.xls
+*.parquet
+
+# Carpetas de trabajo de un proyecto (van en BINATSA-Tableros/, fuera del repo)
+BINATSA-Tableros/
+clientes/
+libro/
+datos/
+capturas/
+video/
+brief.md
+diccionario-datos.md
+!skills/tableros-campanas-binatsa/plantillas/brief.md
+!skills/tableros-campanas-binatsa/plantillas/diccionario-datos.md
+
+# Video y sistema
+*.mp4
+*.mov
+__pycache__/
+.DS_Store
+Thumbs.db
